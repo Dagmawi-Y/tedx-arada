@@ -54,7 +54,7 @@ export default function Hero() {
                             <div className="absolute inset-0 bg-radial-vignette z-20" />
                             <img
                                 src={images[currentImageIndex]}
-                                alt="Background Transition"
+                                alt="TEDxArada - Addis Ababa, Ethiopia - Ideas worth spreading"
                                 className="w-full h-full object-cover scale-110"
                             />
                         </motion.div>
@@ -74,13 +74,14 @@ export default function Hero() {
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                     className="relative max-w-5xl"
                 >
+                    <h1 className="sr-only">TEDxArada: Ideas worth spreading from Addis Ababa, Ethiopia</h1>
                     <h2 className="font-sans text-[11px] md:text-sm text-white/80 tracking-[0.5em] uppercase mb-4 md:mb-6 drop-shadow-md">
                         Ideas worth spreading.
                     </h2>
-                    <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-white font-bold leading-[1.1] drop-shadow-2xl tracking-tight uppercase">
+                    <p className="font-heading text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-white font-bold leading-[1.1] drop-shadow-2xl tracking-tight uppercase">
                         From The Heart of <br className="hidden md:block" />
                         <span className="text-transparent bg-clip-text bg-linear-to-r from-ted-red to-red-500 italic block mt-2 normal-case">Addis Ababa.</span>
-                    </h1>
+                    </p>
                 </motion.div>
 
                 {/* Event Details Strip (Centered Below Heading) */}

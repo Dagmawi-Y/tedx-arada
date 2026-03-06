@@ -1,0 +1,16 @@
+{
+  "name": "TEDxArada",
+  "short_name": "TEDxArada",
+  "description": "Ideas worth spreading from the heart of Addis Ababa, Ethiopia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#eb0028",
+  "theme_color": "#eb0028",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

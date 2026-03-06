@@ -4,22 +4,49 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  canonicalURL?: string;
 }
 
 const {
   title,
-  description = "TEDxArada - Ideas worth spreading in the heart of Addis Ababa.",
+  description = "TEDxArada - Ideas worth spreading in the heart of Addis Ababa, Ethiopia. Join us for a day of inspiration, innovation, and community.",
+  image = "/images/og-image.jpg", // Default OG image
+  canonicalURL = Astro.url.href,
 } = Astro.props;
+
+const siteName = "TEDxArada";
+const fullTitle = `${title} | ${siteName}`;
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth bg-ted-black text-ted-white">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={fullTitle} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
     <!-- Google Fonts: Inter (Body) & Montserrat (Heading) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,7 +56,7 @@ const {
       rel="stylesheet"
     />
 
-    <title>{title}</title>
+    <slot name="head" />
   </head>
   <body
     class="antialiased min-h-screen flex flex-col selection:bg-ted-red selection:text-white font-sans"

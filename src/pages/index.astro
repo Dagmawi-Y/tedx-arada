@@ -8,7 +8,39 @@ import Schedule from "../components/Schedule";
 import Sponsors from "../components/Sponsors";
 ---
 
-<Layout title="TEDxArada">
+<Layout
+  title="Ideas worth spreading"
+  description="TEDxArada - Join us at Fendika@Hyatt in Addis Ababa, Ethiopia, for a transformative day of ideas and inspiration. Discover local innovation and global perspectives."
+>
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "TEDxArada: From The Heart of Addis Ababa",
+      "startDate": "2026-03-14T09:00:00+03:00",
+      "endDate": "2026-03-14T18:00:00+03:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "Fendika Cultural Center & Hyatt Regency",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Africa Avenue",
+          "addressLocality": "Addis Ababa",
+          "addressRegion": "Arada",
+          "addressCountry": "ET"
+        }
+      },
+      "image": ["https://tedxarada.com/images/og-image.jpg"],
+      "description": "TEDxArada is an independently organized TED event in Addis Ababa, Ethiopia, focusing on ideas worth spreading from the local community to the world.",
+      "organizer": {
+        "@type": "Organization",
+        "name": "TEDxArada",
+        "url": "https://tedxarada.com"
+      }
+    }
+  </script>
   <Navbar client:load />
   <main>
     <Hero client:load />
