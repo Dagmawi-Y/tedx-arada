@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@theme {
+  --color-ted-red: #E62B1E;
+  --color-ted-black: #000000;
+  --color-ted-dark: #111111;
+  --color-ted-white: #FFFFFF;
+  --color-arada-accent: #D4AF37;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-ted-black);
+    color: var(--color-ted-white);
+  }
+}

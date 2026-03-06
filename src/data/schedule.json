@@ -1,0 +1,38 @@
+[
+  {
+    "time": "08:30 AM",
+    "title": "Registration & Coffee",
+    "description": "Get your badge, grab a locally roasted coffee, and meet fellow attendees.",
+    "type": "break"
+  },
+  {
+    "time": "09:30 AM",
+    "title": "Welcome to TEDxArada",
+    "description": "Opening remarks from our organizing team.",
+    "type": "session"
+  },
+  {
+    "time": "10:00 AM",
+    "title": "Session 1: The Foundations",
+    "description": "Exploring our shared history and the structural realities of tomorrow.",
+    "type": "session"
+  },
+  {
+    "time": "11:30 AM",
+    "title": "Networking Break & Art Exhibition",
+    "description": "Experience local art and interact with our partners.",
+    "type": "break"
+  },
+  {
+    "time": "12:15 PM",
+    "title": "Session 2: Future Forward",
+    "description": "Technology, art, and the new digital frontier in Ethiopia.",
+    "type": "session"
+  },
+  {
+    "time": "01:30 PM",
+    "title": "Lunch",
+    "description": "A curated culinary experience featuring Ethiopian fusion cuisine.",
+    "type": "break"
+  }
+]
