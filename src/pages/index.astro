@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import About from "../components/About";
 import Speakers from "../components/Speakers";
@@ -8,12 +9,25 @@ import Sponsors from "../components/Sponsors";
 ---
 
 <Layout title="TEDxArada">
+  <Navbar client:load />
   <main>
     <Hero client:load />
-    <About client:visible />
-    <Speakers client:visible />
-    <Schedule client:visible />
-    <Sponsors client:visible />
+
+    <div id="theme" class="scroll-mt-24">
+      <About client:visible />
+    </div>
+
+    <div id="speakers" class="scroll-mt-24">
+      <Speakers client:visible />
+    </div>
+
+    <div id="schedule" class="scroll-mt-24">
+      <Schedule client:visible />
+    </div>
+
+    <div id="sponsors" class="scroll-mt-24">
+      <Sponsors client:visible />
+    </div>
 
     <footer class="bg-ted-black border-t border-white/10 py-12 px-6">
       <div

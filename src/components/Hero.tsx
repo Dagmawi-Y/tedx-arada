@@ -10,29 +10,52 @@ export default function Hero() {
         offset: ["start start", "end start"]
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+    // The background image will move down slower than the container scrolls up
+    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+    // Content fades out as you scroll down
     const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
     return (
         <section
             ref={containerRef}
-            className="min-h-screen flex items-center justify-center relative overflow-hidden px-6"
+            className="h-[100svh] min-h-[600px] flex items-center justify-center relative overflow-hidden"
         >
-            {/* Dynamic Background */}
+            {/* Background with Parallax */}
             <motion.div
-                style={{ y, opacity }}
-                className="absolute inset-0 z-0 flex items-center justify-center opacity-30"
+                style={{ y }}
+                className="absolute inset-x-0 -top-[10%] -bottom-[10%] z-0"
             >
-                <div className="w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] rounded-full bg-ted-red/20 blur-[100px] md:blur-[150px]" />
+                <div className="absolute inset-0 bg-ted-black/60 z-10" /> {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-ted-black/40 via-transparent to-ted-black z-20" /> {/* Edge fading */}
+                <img
+                    src="/images/addis-aerial-shot.jpg"
+                    alt="Addis Ababa Aerial Shot"
+                    className="w-full h-full object-cover"
+                />
             </motion.div>
 
-            <div className="z-10 text-center flex flex-col items-center">
+            {/* Content Container */}
+            <motion.div
+                style={{ opacity }}
+                className="z-30 w-full px-6 flex flex-col items-center justify-center text-center mt-12"
+            >
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
                 >
-                    <h1 className="text-7xl md:text-9xl lg:text-[12rem] font-heading font-black tracking-tighter text-white uppercase leading-none">
+                    <p className="text-ted-red font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase text-sm md:text-base mb-4">
+                        Independently Organized Event
+                    </p>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className="relative"
+                >
+                    <h1 className="text-7xl md:text-[8rem] lg:text-[11rem] font-heading font-black tracking-tighter text-white uppercase leading-[0.9] drop-shadow-2xl">
                         TEDx<span className="text-ted-red">Arada</span>
                     </h1>
                 </motion.div>
@@ -40,31 +63,42 @@ export default function Hero() {
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.5 }}
-                    className="mt-6 md:mt-10 overflow-hidden"
+                    transition={{ duration: 1, delay: 0.6 }}
+                    className="mt-6 md:mt-10 overflow-hidden flex flex-col items-center"
                 >
                     <motion.p
                         initial={{ y: "100%" }}
                         animate={{ y: 0 }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
-                        className="text-xl md:text-3xl text-gray-400 font-light tracking-widest uppercase"
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.7 }}
+                        className="text-xl md:text-3xl text-gray-200 font-light tracking-widest uppercase text-shadow-sm mb-12"
                     >
                         Ideas Worth Spreading
                     </motion.p>
-                </motion.div>
 
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, delay: 1 }}
-                    className="absolute bottom-12"
-                >
-                    <div className="flex flex-col items-center gap-2">
-                        <span className="text-xs tracking-widest text-gray-500 uppercase">Discover</span>
-                        <div className="w-[1px] h-12 bg-gradient-to-b from-gray-500 to-transparent" />
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 1 }}
+                        className="flex flex-col sm:flex-row gap-6 items-center"
+                    >
+                        <a
+                            href="https://forms.gle/your-form-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative inline-flex items-center justify-center px-10 py-5 font-bold text-white uppercase tracking-widest bg-ted-red overflow-hidden rounded-sm"
+                        >
+                            <span className="absolute inset-0 w-full h-full -mt-1 rounded-sm opacity-30 bg-gradient-to-b from-transparent via-transparent to-black" />
+                            <span className="relative z-10 transition-transform duration-300 group-hover:-translate-y-1">Register Now</span>
+                            <div className="absolute inset-0 h-full w-full border-2 border-white/0 group-hover:border-white/20 transition-all duration-300" />
+                        </a>
+
+                        <a href="#theme" className="text-white text-sm tracking-widest uppercase font-medium hover:text-ted-red transition-colors duration-300 py-4 px-6 flex items-center gap-2">
+                            Explore Theme
+                            <span className="animate-bounce">↓</span>
+                        </a>
+                    </motion.div>
                 </motion.div>
-            </div>
+            </motion.div>
         </section>
     );
 }
