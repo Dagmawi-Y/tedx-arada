@@ -30,15 +30,14 @@ export default function Navbar() {
             >
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                     <a href="#" className="relative z-10 flex flex-col items-start cursor-pointer group">
-                        <div className="flex flex-col">
-                            <span className="text-2xl md:text-3xl font-sans tracking-tighter leading-none flex items-center pb-0.5">
-                                <span className="text-ted-red font-black">TED<sup className="text-[0.6em] top-[-0.3em]">x</sup></span>
-                                <span className="text-white font-semibold ml-1">Arada</span>
-                            </span>
-                            <span className="text-[9px] text-white/60 font-sans tracking-wide group-hover:text-white transition-colors self-end mt-0.5 mr-0.5">
-                                x = independently organized TED event
-                            </span>
-                        </div>
+                        <img
+                            src="/images/logo-salon/logo-white.png"
+                            alt="TEDxArada"
+                            className="h-8 md:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                        />
+                        <span className="text-[9px] text-white/50 font-sans tracking-tight self-end -mt-1 group-hover:text-white transition-colors">
+                            x = independently organized TED event
+                        </span>
                     </a>
 
                     {/* Desktop Links */}
