@@ -8,7 +8,7 @@ export default function About() {
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-ted-red/10 rounded-full blur-[150px] opacity-70 transform translate-x-1/3 -translate-y-1/3" />
                 <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-red-900/20 rounded-full blur-[120px] opacity-50 transform -translate-x-1/3 translate-y-1/3" />
-                <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+                <div className="absolute inset-0 opacity-[0.6]" style={{ backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.3) 1.5px, transparent 0)', backgroundSize: '48px 48px', maskImage: 'radial-gradient(circle at center, black, transparent 80%)' }} />
             </div>
 
             <div className="w-full max-w-7xl mx-auto px-6 md:px-12 relative z-10">

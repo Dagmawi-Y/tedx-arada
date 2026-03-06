@@ -13,23 +13,53 @@ interface Speaker {
 
 export default function Speakers() {
     return (
-        <section className="min-h-svh py-24 md:py-40 bg-ted-dark relative overflow-hidden group/speakers flex flex-col justify-center">
-            {/* High-End Grainy Texture (Static) */}
-            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-[0.08]">
+        <section className="min-h-svh py-24 md:py-40 bg-ted-black relative overflow-hidden group/speakers flex flex-col justify-center">
+            {/* Base Background Texture */}
+            <div className="absolute inset-0 z-0">
+                {/* 1. Bold Diagonal Line Pattern */}
                 <div
-                    className="absolute inset-0 bg-repeat"
+                    className="absolute inset-0 opacity-[0.4]"
                     style={{
-                        backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')`,
-                        mixBlendMode: 'overlay'
+                        backgroundImage: `
+                            repeating-linear-gradient(
+                                45deg,
+                                rgba(255, 255, 255, 0.1),
+                                rgba(255, 255, 255, 0.1) 1.5px,
+                                transparent 1.5px,
+                                transparent 60px
+                            )
+                        `,
+                        maskImage: 'radial-gradient(circle at center, black, transparent 90%)'
                     }}
                 />
-            </div>
 
-            {/* Background Accent Lines */}
-            <div className="absolute inset-0 z-0 pointer-events-none flex justify-center opacity-[0.03]">
-                <div className="w-px h-full bg-linear-to-b from-transparent via-white to-transparent absolute left-1/4" />
-                <div className="w-px h-full bg-linear-to-b from-transparent via-white to-transparent absolute left-2/4" />
-                <div className="w-px h-full bg-linear-to-b from-transparent via-white to-transparent absolute left-3/4" />
+                {/* 2. Floating Depth Blobs (Animated) */}
+                <motion.div
+                    animate={{
+                        scale: [1, 1.2, 1],
+                        x: [0, 50, 0],
+                        y: [0, 30, 0]
+                    }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-ted-red/10 rounded-full blur-[120px]"
+                />
+                <motion.div
+                    animate={{
+                        scale: [1, 1.3, 1],
+                        x: [0, -40, 0],
+                        y: [0, -60, 0]
+                    }}
+                    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                    className="absolute bottom-1/4 -right-20 w-[600px] h-[600px] bg-ted-red/5 rounded-full blur-[150px]"
+                />
+
+                {/* 3. High-End Grain Overlay */}
+                <div
+                    className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay"
+                    style={{
+                        backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')`,
+                    }}
+                />
             </div>
 
             <div className="w-full max-w-7xl mx-auto px-6 md:px-12 relative z-10">
