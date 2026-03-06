@@ -29,11 +29,16 @@ export default function Navbar() {
                 className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 will-change-transform ${scrolled ? 'py-4 bg-ted-black/80 backdrop-blur-xl border-b border-white/10' : 'py-6 bg-transparent'}`}
             >
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-                    <a href="#" className="relative z-10 flex items-center cursor-pointer">
-                        <span className="text-xl md:text-2xl font-sans tracking-tighter leading-none flex items-center">
-                            <span className="text-ted-red font-black">TED<sup className="text-[0.6em] top-[-0.3em]">x</sup></span>
-                            <span className="text-white font-normal ml-1">Arada</span>
-                        </span>
+                    <a href="#" className="relative z-10 flex flex-col items-start cursor-pointer group">
+                        <div className="flex flex-col">
+                            <span className="text-2xl md:text-3xl font-sans tracking-tighter leading-none flex items-center pb-0.5">
+                                <span className="text-ted-red font-black">TED<sup className="text-[0.6em] top-[-0.3em]">x</sup></span>
+                                <span className="text-white font-semibold ml-1">Arada</span>
+                            </span>
+                            <span className="text-[9px] text-white/60 font-sans tracking-wide group-hover:text-white transition-colors self-end mt-0.5 mr-0.5">
+                                x = independently organized TED event
+                            </span>
+                        </div>
                     </a>
 
                     {/* Desktop Links */}
@@ -52,20 +57,23 @@ export default function Navbar() {
                             href="https://forms.gle/your-form-link"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-6 py-2.5 bg-ted-red text-white text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-ted-red transition-colors duration-300 rounded-sm"
+                            className="px-6 py-2.5 bg-ted-red text-white text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-ted-red transition-colors duration-300 rounded-[2px]"
                         >
-                            Get Tickets
+                            Register
                         </a>
                     </div>
 
                     {/* Mobile Menu Toggle */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="md:hidden relative z-10 p-2 text-white"
+                        className="md:hidden relative z-10 p-2 text-white hover:text-ted-red transition-colors duration-300"
                         aria-label="Toggle menu"
                     >
-                        <div className={`w-6 h-0.5 bg-current transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-1.5' : 'mb-1.5'}`}></div>
-                        <div className={`w-6 h-0.5 bg-current transition-all duration-300 ${mobileMenuOpen ? '-rotate-45' : ''}`}></div>
+                        {mobileMenuOpen ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                        ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12h16M4 6h16M4 18h16" /></svg>
+                        )}
                     </button>
                 </div>
             </motion.nav>
@@ -100,9 +108,9 @@ export default function Navbar() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => setMobileMenuOpen(false)}
-                            className="mt-8 px-8 py-4 bg-ted-red text-white text-xl font-bold uppercase tracking-wider w-full text-center hover:bg-white hover:text-ted-red transition-colors"
+                            className="mt-8 px-8 py-4 bg-ted-red text-white text-xl font-bold uppercase tracking-wider w-full text-center hover:bg-white hover:text-ted-red transition-colors rounded-[2px]"
                         >
-                            Get Tickets
+                            Register
                         </motion.a>
                     </motion.div>
                 )}

@@ -33,14 +33,32 @@ import Sponsors from "../components/Sponsors";
       <div
         class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
       >
-        <p class="text-xl font-sans tracking-tighter flex items-center">
-          <span class="text-ted-red font-black"
-            >TED<sup class="text-[0.6em] top-[-0.3em]">x</sup></span
+        <div class="flex flex-col items-center md:items-start gap-2">
+          <h4
+            class="text-2xl font-sans tracking-tighter leading-none flex items-center"
           >
-          <span class="text-white font-normal ml-1">Arada</span>
-        </p>
-        <p class="text-gray-500 text-sm font-sans text-center md:text-right">
-          This independent TEDx event is operated under license from TED.<br />
+            <span class="text-ted-red font-black"
+              >TED<sup class="text-[0.6em] top-[-0.3em]">x</sup></span
+            >
+            <span class="text-white font-semibold ml-1">Arada</span>
+          </h4>
+          <span class="text-white/50 font-sans text-[10px] tracking-wide">
+            x = independently organized TED event
+          </span>
+        </div>
+
+        <div class="flex items-center gap-6 text-sm text-gray-400 font-sans">
+          <a href="#" class="hover:text-white transition-colors">Instagram</a>
+          <a href="#" class="hover:text-white transition-colors">Twitter</a>
+          <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+        </div>
+      </div>
+
+      <div
+        class="max-w-7xl mx-auto mt-12 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-sans"
+      >
+        <p>This independent TEDx event is operated under license from TED.</p>
+        <p class="mt-2 md:mt-0">
           &copy; {new Date().getFullYear()} TEDxArada. All Rights Reserved.
         </p>
       </div>

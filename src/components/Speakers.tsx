@@ -16,7 +16,7 @@ const speakersData: Speaker[] = [
         "name": "Prof. Abebe Zegeye",
         "role": "Urban Historian",
         "topic": "The Hidden Layers of Arada",
-        "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&h=500&auto=format&fit=crop",
+        "image": "/images/speaker_male.png",
         "bio": "Exploring the architectural and cultural evolution of Addis Ababa's most historic district."
     },
     {
@@ -24,82 +24,77 @@ const speakersData: Speaker[] = [
         "name": "Salem Kassahun",
         "role": "AI Researcher & Artist",
         "topic": "Generative Art in Ethiopian Context",
-        "image": "https://images.unsplash.com/photo-1531123897727-8f129e1bf98c?q=80&w=400&h=500&auto=format&fit=crop",
+        "image": "/images/speaker_female.png",
         "bio": "Bridging the gap between traditional Ethiopian motifs and modern machine learning aesthetics."
-    },
-    {
-        "id": "3",
-        "name": "Dr. Tewodros Melesse",
-        "role": "Climate Scientist",
-        "topic": "Sustainable Future for the Horn",
-        "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&h=500&auto=format&fit=crop",
-        "bio": "Actionable climate solutions tailored for the unique challenges of the Horn of Africa."
-    },
-    {
-        "id": "4",
-        "name": "Mahlet Yohannes",
-        "role": "Tech Entrepreneur",
-        "topic": "Building Products for the Next Billion",
-        "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&h=500&auto=format&fit=crop",
-        "bio": "Insights from building scalable tech solutions that impact millions of lives in emerging markets."
     }
 ];
 
 export default function Speakers() {
-    const container = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15
-            }
-        }
-    };
-
-    const item = {
-        hidden: { opacity: 0, y: 30 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-    };
-
     return (
-        <section className="py-24 px-6 bg-ted-dark">
-            <div className="max-w-7xl mx-auto">
-                <div className="mb-16">
-                    <h2 className="text-4xl md:text-6xl font-heading font-black text-white uppercase">
-                        The <span className="text-ted-red">Voices</span>
-                    </h2>
-                    <p className="mt-4 text-gray-400 font-sans max-w-lg">Meet the visionaries, artists, and leaders shaping our future at TEDxArada.</p>
-                </div>
+        <section className="min-h-svh py-24 md:py-40 bg-ted-dark relative overflow-hidden group/speakers flex flex-col justify-center">
+            {/* High-End Grainy Texture (Static) */}
+            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-[0.08]">
+                <div
+                    className="absolute inset-0 bg-repeat"
+                    style={{
+                        backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')`,
+                        mixBlendMode: 'overlay'
+                    }}
+                />
+            </div>
 
-                <motion.div
-                    variants={container}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-50px" }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-                >
-                    {speakersData.map((speaker) => (
-                        <motion.div key={speaker.id} variants={item} className="group relative overflow-hidden rounded-xl bg-ted-black border border-white/5 cursor-pointer">
-                            <div className="aspect-[4/5] overflow-hidden relative">
+            {/* Background Accent Lines */}
+            <div className="absolute inset-0 z-0 pointer-events-none flex justify-center opacity-[0.03]">
+                <div className="w-px h-full bg-linear-to-b from-transparent via-white to-transparent absolute left-1/4" />
+                <div className="w-px h-full bg-linear-to-b from-transparent via-white to-transparent absolute left-2/4" />
+                <div className="w-px h-full bg-linear-to-b from-transparent via-white to-transparent absolute left-3/4" />
+            </div>
+
+            <div className="w-full max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+                <header className="mb-12 md:mb-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <h2 className="text-4xl md:text-5xl font-heading font-bold text-white tracking-tight flex items-center gap-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ted-red drop-shadow-[0_0_10px_rgba(235,0,40,0.5)]"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v1a7 7 0 0 1-14 0v-1" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
+                            Our <span className="text-ted-red italic underline decoration-1 underline-offset-8">Speakers.</span>
+                        </h2>
+                    </motion.div>
+                </header>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-24 gap-y-16 md:gap-y-24">
+                    {speakersData.map((speaker, index) => (
+                        <motion.div
+                            key={speaker.id}
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                            className="flex flex-col group cursor-default"
+                        >
+                            <div className="w-full relative overflow-hidden bg-ted-black aspect-3/2 mb-6 md:mb-8 rounded-3xl shadow-2xl border border-white/5">
                                 <div className="absolute inset-0 bg-ted-red/20 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-multiply" />
                                 <img
                                     src={speaker.image}
                                     alt={speaker.name}
-                                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                                    className="w-full h-full object-cover filter grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
                                 />
-                                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 z-20">
-                                    <h3 className="text-xl font-heading font-bold text-white mb-1 group-hover:text-ted-red transition-colors">{speaker.name}</h3>
-                                    <p className="text-sm text-gray-300 font-sans">{speaker.role}</p>
-                                </div>
                             </div>
-                            <div className="absolute inset-0 bg-ted-black/95 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-30 flex flex-col justify-center">
-                                <h4 className="text-ted-red font-bold text-sm uppercase tracking-wider mb-2">Topic</h4>
-                                <p className="text-xl font-heading font-medium text-white mb-4 line-clamp-2">{speaker.topic}</p>
-                                <p className="text-gray-400 text-sm font-sans line-clamp-4">{speaker.bio}</p>
+
+                            <div className="flex flex-col">
+                                <h4 className="text-xl md:text-2xl font-heading font-bold text-white group-hover:text-ted-red transition-colors duration-300 tracking-tight">
+                                    {speaker.name}
+                                </h4>
+                                <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-[0.2em] mt-1 font-medium italic">
+                                    {speaker.role}
+                                </p>
                             </div>
                         </motion.div>
                     ))}
-                </motion.div>
+                </div>
             </div>
         </section>
     );

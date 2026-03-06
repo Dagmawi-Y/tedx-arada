@@ -20,79 +20,88 @@ export default function Hero() {
             ref={containerRef}
             className="h-svh min-h-[600px] flex items-center justify-center relative overflow-hidden"
         >
-            {/* Background with Parallax */}
+            {/* Background with Parallax and Vignette */}
             <motion.div
                 style={{ y }}
                 className="absolute inset-x-0 -top-[10%] -bottom-[10%] z-0"
             >
-                <div className="absolute inset-0 bg-ted-black/60 z-10" /> {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-linear-to-b from-ted-black/40 via-transparent to-ted-black z-20" /> {/* Edge fading */}
+                <div className="absolute inset-0 bg-ted-black/25 z-10" />
+                <div className="absolute inset-0 bg-radial-vignette z-20" /> {/* Edge Scrim */}
                 <img
                     src="/images/addis-aerial-shot.jpg"
                     alt="Addis Ababa Aerial Shot"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover scale-110"
                 />
             </motion.div>
 
             {/* Content Container */}
             <motion.div
                 style={{ opacity }}
-                className="z-30 w-full px-6 flex flex-col items-center justify-center text-center mt-12"
+                className="z-30 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center justify-center text-center pb-24 md:pb-32 pt-40"
             >
-                {/* Removed top tagline to place it precisely under the logo */}
-
+                {/* Main Heading Content (Premium English Look) */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative flex flex-col items-end"
+                    className="relative max-w-5xl"
                 >
-                    <h1 className="flex items-center font-sans tracking-tighter drop-shadow-2xl leading-[0.9]">
-                        <span className="text-ted-red font-black text-6xl sm:text-8xl md:text-[9rem] lg:text-[12rem]">TED<sup className="text-[0.6em] top-[-0.3em]">x</sup></span>
-                        <span className="text-white font-normal text-6xl sm:text-8xl md:text-[9rem] lg:text-[12rem] ml-2 md:ml-4">Arada</span>
+                    <h2 className="font-sans text-lg md:text-xl lg:text-2xl text-white/80 tracking-[0.5em] font-light uppercase mb-6 md:mb-10 drop-shadow-md">
+                        Ideas worth spreading.
+                    </h2>
+                    <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white font-bold leading-[1.0] drop-shadow-2xl tracking-tight uppercase">
+                        The Heart of <br className="hidden md:block" />
+                        <span className="text-transparent bg-clip-text bg-linear-to-r from-ted-red to-red-500 italic block mt-2 normal-case">Addis Ababa.</span>
                     </h1>
-                    <p className="text-white font-sans text-sm md:text-xl lg:text-2xl mt-2 tracking-wide font-light">
-                        x = independently organized TED event
-                    </p>
                 </motion.div>
 
+                {/* Event Details Strip (Centered Below Heading) */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.6 }}
-                    className="mt-6 md:mt-10 overflow-hidden flex flex-col items-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-12 mt-12 md:mt-20 border-y border-white/10 py-6 w-full max-w-2xl"
                 >
-                    <motion.p
-                        initial={{ y: "100%" }}
-                        animate={{ y: 0 }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.7 }}
-                        className="text-xl md:text-3xl text-gray-200 font-light tracking-widest uppercase text-shadow-sm mb-12"
-                    >
-                        Ideas Worth Spreading
-                    </motion.p>
+                    <div className="text-center group flex flex-col items-center">
+                        <p className="text-[10px] uppercase tracking-widest text-white/40 mb-2 font-bold flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ted-red"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+                        </p>
+                        <p className="text-lg md:text-xl text-white font-sans font-medium transition-colors group-hover:text-ted-red">March 14, 2026</p>
+                    </div>
+                    <div className="hidden md:block h-8 w-px bg-white/10" />
+                    <div className="text-center group flex flex-col items-center">
+                        <p className="text-[10px] uppercase tracking-widest text-white/40 mb-2 font-bold flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ted-red"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                        </p>
+                        <p className="text-lg md:text-xl text-white font-sans font-medium transition-colors group-hover:text-ted-red">Fendika@Hyatt</p>
+                    </div>
+                </motion.div>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 1 }}
-                        className="flex flex-col sm:flex-row gap-6 items-center"
+                {/* Buttons (Centered) */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.8 }}
+                    className="flex flex-col sm:flex-row gap-8 items-center mt-12 md:mt-16"
+                >
+                    <a
+                        href="https://forms.gle/your-form-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative inline-flex items-center justify-center px-12 py-5 font-bold text-white uppercase tracking-[0.2em] bg-ted-red overflow-hidden rounded-sm transition-all duration-300 hover:scale-[1.05] hover:shadow-[0_0_40px_rgba(235,0,40,0.5)] active:scale-[0.98]"
                     >
-                        <a
-                            href="https://forms.gle/your-form-link"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group relative inline-flex items-center justify-center px-10 py-5 font-bold text-white uppercase tracking-widest bg-ted-red overflow-hidden rounded-sm"
+                        <span className="relative z-10">Register Now</span>
+                    </a>
+
+                    <a href="#theme" className="group text-white/70 text-sm tracking-[0.2em] uppercase font-bold hover:text-white transition-colors duration-300 py-4 flex items-center gap-3">
+                        Explore Theme
+                        <motion.span
+                            animate={{ y: [0, 5, 0] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                         >
-                            <span className="absolute inset-0 w-full h-full -mt-1 rounded-sm opacity-30 bg-linear-to-b from-transparent via-transparent to-black" />
-                            <span className="relative z-10 transition-transform duration-300 group-hover:-translate-y-1">Register Now</span>
-                            <div className="absolute inset-0 h-full w-full border-2 border-white/0 group-hover:border-white/20 transition-all duration-300" />
-                        </a>
-
-                        <a href="#theme" className="text-white text-sm tracking-widest uppercase font-medium hover:text-ted-red transition-colors duration-300 py-4 px-6 flex items-center gap-2">
-                            Explore Theme
-                            <span className="animate-bounce">↓</span>
-                        </a>
-                    </motion.div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                        </motion.span>
+                    </a>
                 </motion.div>
             </motion.div>
         </section>
