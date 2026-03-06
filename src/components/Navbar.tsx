@@ -53,7 +53,7 @@ export default function Navbar() {
                             </a>
                         ))}
                         <a
-                            href="https://forms.gle/your-form-link"
+                            href="https://forms.gle/dzSCXAMxQwTaKGfm7"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-6 py-2.5 bg-ted-red text-white text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-ted-red transition-colors duration-300 rounded-[2px]"
@@ -103,7 +103,7 @@ export default function Navbar() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
-                            href="https://forms.gle/your-form-link"
+                            href="https://forms.gle/dzSCXAMxQwTaKGfm7"
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => setMobileMenuOpen(false)}

@@ -114,7 +114,7 @@ export default function Hero() {
                     className="flex flex-col sm:flex-row gap-8 items-center mt-20 md:mt-24"
                 >
                     <a
-                        href="https://forms.gle/your-form-link"
+                        href="https://forms.gle/dzSCXAMxQwTaKGfm7"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group relative inline-flex items-center justify-center px-10 py-4 font-bold text-white uppercase tracking-[0.2em] bg-ted-red overflow-hidden rounded-sm transition-all duration-300 hover:scale-[1.05] hover:shadow-[0_0_40px_rgba(235,0,40,0.5)] active:scale-[0.98]"
