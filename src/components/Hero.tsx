@@ -95,7 +95,7 @@ export default function Hero() {
                         <p className="text-[10px] uppercase tracking-widest text-white/40 mb-2 font-bold flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ted-red"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
                         </p>
-                        <p className="text-sm md:text-base text-white font-sans font-medium transition-colors group-hover:text-ted-red">March 14, 2026</p>
+                        <p className="text-sm md:text-base text-white font-sans font-medium transition-colors group-hover:text-ted-red">March 14</p>
                     </div>
                     <div className="hidden md:block h-8 w-px bg-white/10" />
                     <div className="text-center group flex flex-col items-center">
