@@ -1,21 +1,25 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 
-const images = [
-    "/images/hero-bg/addis-aerial-shot.jpg",
-    "/images/hero-bg/national-theater.jpg"
-];
-
 export default function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const [images, setImages] = useState<string[]>([]);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     useEffect(() => {
+        // Automatically find all images in the hero-bg assets folder
+        const imagesModules = import.meta.glob('../assets/hero-bg/*.{png,jpg,jpeg,webp,svg}', { eager: true });
+        const imagesList = Object.values(imagesModules).map((mod: any) => mod.default.src || mod.default);
+        setImages(imagesList);
+    }, []);
+
+    useEffect(() => {
+        if (images.length === 0) return;
         const timer = setInterval(() => {
             setCurrentImageIndex((prev) => (prev + 1) % images.length);
         }, 6000);
         return () => clearInterval(timer);
-    }, []);
+    }, [images]);
 
     // Parallax subtle effect on scroll
     const { scrollYProgress } = useScroll({
@@ -35,25 +39,27 @@ export default function Hero() {
         >
             {/* Background Slideshow with Parallax */}
             <div className="absolute inset-0 z-0">
-                <AnimatePresence>
-                    <motion.div
-                        key={currentImageIndex}
-                        initial={{ x: '5%', opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: '-5%', opacity: 0 }}
-                        transition={{ duration: 2, ease: "easeInOut" }}
-                        style={{ y }}
-                        className="absolute inset-x-0 -top-[10%] -bottom-[10%]"
-                    >
-                        <div className="absolute inset-0 bg-ted-black/75 z-10" />
-                        <div className="absolute inset-0 bg-radial-vignette z-20" />
-                        <img
-                            src={images[currentImageIndex]}
-                            alt="Background Transition"
-                            className="w-full h-full object-cover scale-110"
-                        />
-                    </motion.div>
-                </AnimatePresence>
+                {images.length > 0 && (
+                    <AnimatePresence>
+                        <motion.div
+                            key={currentImageIndex}
+                            initial={{ x: '5%', opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            exit={{ x: '-5%', opacity: 0 }}
+                            transition={{ duration: 2, ease: "easeInOut" }}
+                            style={{ y }}
+                            className="absolute inset-x-0 -top-[10%] -bottom-[10%]"
+                        >
+                            <div className="absolute inset-0 bg-ted-black/75 z-10" />
+                            <div className="absolute inset-0 bg-radial-vignette z-20" />
+                            <img
+                                src={images[currentImageIndex]}
+                                alt="Background Transition"
+                                className="w-full h-full object-cover scale-110"
+                            />
+                        </motion.div>
+                    </AnimatePresence>
+                )}
             </div>
 
             {/* Content Container */}
