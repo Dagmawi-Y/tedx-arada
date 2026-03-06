@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import speakersData from '../data/speakers.json';
 
 interface Speaker {
     id: string;
@@ -9,25 +10,6 @@ interface Speaker {
     image: string;
     bio: string;
 }
-
-const speakersData: Speaker[] = [
-    {
-        "id": "1",
-        "name": "Prof. Abebe Zegeye",
-        "role": "Urban Historian",
-        "topic": "The Hidden Layers of Arada",
-        "image": "/images/speaker_male.png",
-        "bio": "Exploring the architectural and cultural evolution of Addis Ababa's most historic district."
-    },
-    {
-        "id": "2",
-        "name": "Salem Kassahun",
-        "role": "AI Researcher & Artist",
-        "topic": "Generative Art in Ethiopian Context",
-        "image": "/images/speaker_female.png",
-        "bio": "Bridging the gap between traditional Ethiopian motifs and modern machine learning aesthetics."
-    }
-];
 
 export default function Speakers() {
     return (
@@ -65,7 +47,7 @@ export default function Speakers() {
                     </motion.div>
                 </header>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-24 gap-y-16 md:gap-y-24">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-24 gap-y-20 md:gap-y-32">
                     {speakersData.map((speaker, index) => (
                         <motion.div
                             key={speaker.id}
@@ -75,22 +57,38 @@ export default function Speakers() {
                             transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                             className="flex flex-col group cursor-default"
                         >
-                            <div className="w-full relative overflow-hidden bg-ted-black aspect-3/2 mb-6 md:mb-8 rounded-3xl shadow-2xl border border-white/5">
-                                <div className="absolute inset-0 bg-ted-red/20 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-multiply" />
+                            {/* Speaker Image Container */}
+                            <div className="w-full relative overflow-hidden bg-ted-black aspect-4/5 mb-8 md:mb-10 rounded-4xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] border border-white/5">
+                                {/* Hover Reveal Content */}
+                                <div className="absolute inset-0 bg-linear-to-t from-ted-black via-ted-black/80 to-transparent z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8 md:p-10">
+                                    <div className="transform translate-y-8 group-hover:translate-y-0 transition-all duration-700 ease-out delay-75">
+                                        <p className="text-ted-red text-[10px] font-heading font-black uppercase tracking-[0.35em] mb-2 drop-shadow-sm">The Talk</p>
+                                        <h3 className="text-xl md:text-2xl font-heading font-bold text-white mb-5 leading-tight tracking-tight">
+                                            {speaker.topic}
+                                        </h3>
+                                        <div className="w-12 h-px bg-white/20 mb-5" />
+                                        <p className="text-xs md:text-sm font-sans text-white/60 leading-relaxed line-clamp-4">
+                                            {speaker.bio}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Image with filters */}
                                 <img
                                     src={speaker.image}
                                     alt={speaker.name}
-                                    className="w-full h-full object-cover filter grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
+                                    className="w-full h-full object-cover filter grayscale brightness-90 contrast-110 group-hover:grayscale-0 group-hover:scale-105 group-hover:brightness-100 transition-all duration-1000 ease-out"
                                 />
                             </div>
 
-                            <div className="flex flex-col">
-                                <h4 className="text-xl md:text-2xl font-heading font-bold text-white group-hover:text-ted-red transition-colors duration-300 tracking-tight">
-                                    {speaker.name}
-                                </h4>
-                                <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-[0.2em] mt-1 font-medium italic">
+                            {/* Info Section */}
+                            <div className="flex flex-col px-2">
+                                <p className="text-ted-red text-[11px] md:text-sm font-heading font-black uppercase tracking-[0.25em] mb-3">
                                     {speaker.role}
                                 </p>
+                                <h4 className="text-2xl md:text-4xl font-heading font-bold text-white group-hover:text-ted-red transition-colors duration-500 tracking-tight leading-tight">
+                                    {speaker.name}
+                                </h4>
                             </div>
                         </motion.div>
                     ))}

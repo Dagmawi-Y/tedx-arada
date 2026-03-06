@@ -24,8 +24,8 @@ export default function About() {
                             The Spirit.
                         </h4>
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-[1.1] tracking-tight">
-                            Bringing global ideas to <br className="hidden md:block" />
-                            <span className="text-transparent bg-clip-text bg-linear-to-r from-ted-red to-red-500 italic block mt-2 text-5xl md:text-6xl lg:text-7xl">Addis Ababa.</span>
+                            Bringing ideas to <br className="hidden md:block" />
+                            <span className="text-transparent bg-clip-text bg-linear-to-r from-ted-red to-red-500 italic block mt-2 text-5xl md:text-6xl lg:text-7xl">Addis.</span>
                         </h2>
                     </motion.div>
 
@@ -40,8 +40,7 @@ export default function About() {
                         <div className="lg:pl-0">
                             <h3 className="text-sm font-bold tracking-widest text-ted-red uppercase mb-8 flex items-center gap-4">
                                 <span className="w-8 h-px bg-ted-red"></span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ted-red"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" /><path d="m5 3 1 1" /><path d="m19 17 1 1" /><path d="M3 5h2" /><path d="M19 19h2" /></svg>
-                                About TEDxArada
+                                About
                             </h3>
                             <p className="text-xl md:text-2xl text-gray-300 font-sans leading-relaxed font-light">
                                 TEDxArada is a local, independently organized event that brings people together to share a TED-like experience.

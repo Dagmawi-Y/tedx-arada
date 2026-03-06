@@ -26,7 +26,7 @@ export default function Navbar() {
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-                className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 will-change-transform ${scrolled ? 'py-4 bg-ted-black/80 backdrop-blur-xl border-b border-white/10' : 'py-6 bg-transparent'}`}
+                className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 will-change-transform ${scrolled ? 'py-4 bg-ted-black/80 backdrop-blur-xl' : 'py-6 bg-transparent'}`}
             >
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                     <a href="#" className="relative z-10 flex flex-col items-start cursor-pointer group">
