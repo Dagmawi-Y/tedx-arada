@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ted-red: #E62B1E;
+  --color-ted-red: #e62b1e;
   --color-ted-black: #000000;
   --color-ted-dark: #111111;
-  --color-ted-white: #FFFFFF;
-  --color-arada-accent: #D4AF37;
+  --color-ted-white: #ffffff;
+  --color-arada-accent: #d4af37;
 
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-heading: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Montserrat", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -20,6 +20,22 @@
 
 @layer utilities {
   .bg-radial-vignette {
-    background: radial-gradient(circle, transparent 0%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.8) 100%);
+    background: radial-gradient(
+      circle,
+      transparent 0%,
+      rgba(0, 0, 0, 0.4) 70%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 3px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #e62b1e;
+    border-radius: 10px;
   }
 }

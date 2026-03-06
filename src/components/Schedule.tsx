@@ -3,44 +3,44 @@ import { motion, AnimatePresence } from 'motion/react';
 
 const scheduleData = [
     {
-        "time": "08:30 AM",
-        "title": "Registration & Coffee",
-        "description": "Get your badge, grab a locally roasted coffee, and meet fellow attendees.",
+        "time": "02:30 PM",
+        "title": "Registration & Networking",
+        "description": "Welcome to TEDxArada. Check-in, grab your badge, and meet fellow attendees.",
         "type": "break",
         "icon": <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 2v2m4-2v2m2 4a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1M6 2v2" /></svg>
     },
     {
-        "time": "09:30 AM",
-        "title": "Welcome to TEDxArada",
-        "description": "Opening remarks from our organizing team.",
+        "time": "03:00 PM",
+        "title": "Opening: The Heart of Arada",
+        "description": "Opening remarks and an introduction to today's speakers.",
         "type": "session",
         "icon": <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v1a7 7 0 0 1-14 0v-1" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
     },
     {
-        "time": "10:00 AM",
-        "title": "Session 1: The Foundations",
-        "description": "Exploring our shared history and the structural realities of tomorrow.",
+        "time": "03:15 PM",
+        "title": "Session 1: Amadou Daffe",
+        "description": "CEO & Founder at Gebeya Inc - Exploring Africa's AI Agents and infrastructure.",
         "type": "session",
         "icon": <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg>
     },
     {
-        "time": "11:30 AM",
-        "title": "Networking Break & Art Exhibition",
-        "description": "Experience local art and interact with our partners.",
+        "time": "04:00 PM",
+        "title": "Quick Networking Break",
+        "description": "A focused space for deep conversations and community connection.",
         "type": "break",
         "icon": <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="4" /><line x1="4.93" y1="4.93" x2="19.07" y2="19.07" /></svg>
     },
     {
-        "time": "12:15 PM",
-        "title": "Session 2: Future Forward",
-        "description": "Technology, art, and the new digital frontier in Ethiopia.",
+        "time": "04:30 PM",
+        "title": "Session 2: Melat Belayneh",
+        "description": "Business Growth & Communications - Navigating innovation in Ethiopia's economy.",
         "type": "session",
         "icon": <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" /><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /></svg>
     },
     {
-        "time": "01:30 PM",
-        "title": "Lunch",
-        "description": "A curated culinary experience featuring Ethiopian fusion cuisine.",
+        "time": "05:15 PM",
+        "title": "Closing Remarks",
+        "description": "Final takeaways and networking until close.",
         "type": "break",
         "icon": <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m16 2 2 2-4 4M21 3l-1.41 1.41a2 2 0 0 0 0 2.83L21 9" /><path d="M15 16s-2 1-4 1-4-1-4-1" /><path d="M13 2s-3 1-3 1" /><path d="M12 15V8" /><path d="M3 21h18" /></svg>
     }

@@ -1,18 +1,18 @@
 [
   {
-        "id": "1",
-        "name": "Prof. Abebe Zegeye",
-        "role": "Urban Historian",
-        "topic": "The Hidden Layers of Arada",
-        "image": "/images/speaker_male.png",
-        "bio": "Exploring the architectural and cultural evolution of Addis Ababa's most historic district."
-    },
-    {
-        "id": "2",
-        "name": "Salem Kassahun",
-        "role": "AI Researcher & Artist",
-        "topic": "Generative Art in Ethiopian Context",
-        "image": "/images/speaker_female.png",
-        "bio": "Bridging the gap between traditional Ethiopian motifs and modern machine learning aesthetics."
-    }
+    "id": "amadou-daffe",
+    "name": "Amadou Daffe",
+    "role": "CEO & Founder, Gebeya Inc",
+    "topic": "Africa's AI Agents & The Tool Problem",
+    "image": "/images/speakers/1-amadou.jpeg",
+    "bio": "Amadou Daffe is the CEO and Co-founder of Gebeya, where he is building Africa’s own AI agents for the continent’s service and creative economy. With a background in Computer Science and Information Systems, Amadou’s real inspiration came from seeing talented African professionals struggle not because of lack of talent, but because of inadequate tools. This realization led him to found Gebeya in 2016. Today, the company is creating digital assistants designed for the realities of African businesses from mobile money to WhatsApp-driven commerce. Passionate about África, technology, and talent, Amadou believes the continent doesn’t have a talent problem it has a tool problem. Through Gebeya, he is working to equip millions of African entrepreneurs with the infrastructure they need to build and scale successful businesses."
+  },
+  {
+    "id": "melat-belayneh",
+    "name": "Melat Belayneh",
+    "role": "Business Growth, Coaching & Communications",
+    "topic": "Innovation in Ethiopia's Service Economy",
+    "image": "/images/speakers/1-melat.jpeg",
+    "bio": "Melat Belayneh is a tech entrepreneur and Founder/CEO of WAZA Trading PLC, specializing in hospitality and events technology. With 15+ years in FMCG marketing, she has led campaigns for global brands including Unilever, Diageo, Monin, and Estée Lauder Companies. She also works with organizations such as UN Women and UNFPA on initiatives advancing social impact and gender equity in Ethiopia."
+  }
 ]

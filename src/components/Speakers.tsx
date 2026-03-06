@@ -120,7 +120,7 @@ export default function Speakers() {
 
                     <div
                         ref={scrollRef}
-                        className="flex gap-8 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-6 md:px-[max(1.5rem,calc((100vw-80rem)/2+3rem))] pb-12 pt-4 justify-start md:justify-center"
+                        className="flex gap-12 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-12 pt-4 px-6 md:px-12 justify-center"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
                         {speakersData.map((speaker, index) => (
@@ -136,15 +136,17 @@ export default function Speakers() {
                                 <div className="w-full relative overflow-hidden bg-ted-black aspect-3/4 mb-6 rounded-3xl shadow-[0_20px_40px_-12px_rgba(0,0,0,0.5)] border border-white/5">
                                     {/* Hover Reveal Content */}
                                     <div className="absolute inset-0 bg-linear-to-t from-ted-black via-ted-black/90 to-transparent z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
-                                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-all duration-700 ease-out">
-                                            <p className="text-ted-red text-[9px] font-heading font-black uppercase tracking-[0.35em] mb-2">The Talk</p>
-                                            <h3 className="text-lg font-heading font-bold text-white mb-4 leading-tight">
+                                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-all duration-700 ease-out h-full flex flex-col justify-end">
+                                            <p className="text-ted-red text-[10px] font-heading font-black uppercase tracking-[0.35em] mb-2 shrink-0">The Talk</p>
+                                            <h3 className="text-xl font-heading font-bold text-white mb-4 leading-tight shrink-0">
                                                 {speaker.topic}
                                             </h3>
-                                            <div className="w-8 h-px bg-white/20 mb-4" />
-                                            <p className="text-[11px] font-sans text-white/60 leading-relaxed line-clamp-4">
-                                                {speaker.bio}
-                                            </p>
+                                            <div className="w-8 h-px bg-white/20 mb-4 shrink-0" />
+                                            <div className="overflow-y-auto pr-2 custom-scrollbar max-h-[180px]">
+                                                <p className="text-sm font-sans text-white/80 leading-relaxed">
+                                                    {speaker.bio}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -168,8 +170,6 @@ export default function Speakers() {
                             </motion.div>
                         ))}
 
-                        {/* Extra spacing at the end for scrolling */}
-                        <div className="flex-none w-px md:w-20 h-1" />
                     </div>
                 </div>
             </div>
