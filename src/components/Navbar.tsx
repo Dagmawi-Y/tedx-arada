@@ -30,8 +30,9 @@ export default function Navbar() {
             >
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                     <a href="#" className="relative z-10 flex items-center cursor-pointer">
-                        <span className="text-xl md:text-2xl font-heading font-black tracking-tighter text-white uppercase leading-none">
-                            TEDx<span className="text-ted-red">Arada</span>
+                        <span className="text-xl md:text-2xl font-sans tracking-tighter leading-none flex items-center">
+                            <span className="text-ted-red font-black">TED<sup className="text-[0.6em] top-[-0.3em]">x</sup></span>
+                            <span className="text-white font-normal ml-1">Arada</span>
                         </span>
                     </a>
 
