@@ -7,6 +7,8 @@ export default function Speakers() {
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
 
+    const [activeBio, setActiveBio] = useState<string | null>(null);
+
     const checkScroll = () => {
         if (scrollRef.current) {
             const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
@@ -120,7 +122,7 @@ export default function Speakers() {
 
                     <div
                         ref={scrollRef}
-                        className="flex gap-12 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-12 pt-4 px-6 md:px-12 justify-center"
+                        className="flex gap-8 md:gap-12 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-12 pt-4 px-8 md:px-12 md:justify-center"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
                         {speakersData.map((speaker, index) => (
@@ -130,46 +132,67 @@ export default function Speakers() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                                className="flex-none w-[280px] md:w-[320px] snap-start group cursor-default"
+                                className="flex-none w-[300px] md:w-[340px] snap-center md:snap-start group cursor-default"
                             >
-                                {/* Speaker Image Container (Scaled down) */}
-                                <div className="w-full relative overflow-hidden bg-ted-black aspect-3/4 mb-6 rounded-3xl shadow-[0_20px_40px_-12px_rgba(0,0,0,0.5)] border border-white/5">
-                                    {/* Hover Reveal Content */}
-                                    <div className="absolute inset-0 bg-linear-to-t from-ted-black via-ted-black/90 to-transparent z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
-                                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-all duration-700 ease-out h-full flex flex-col justify-end">
-                                            <p className="text-ted-red text-[10px] font-heading font-black uppercase tracking-[0.35em] mb-2 shrink-0">The Talk</p>
-                                            <h3 className="text-xl font-heading font-bold text-white mb-4 leading-tight shrink-0">
-                                                {speaker.topic}
-                                            </h3>
-                                            <div className="w-8 h-px bg-white/20 mb-4 shrink-0" />
-                                            <div className="overflow-y-auto pr-2 custom-scrollbar max-h-[180px]">
-                                                <p className="text-sm font-sans text-white/80 leading-relaxed">
-                                                    {speaker.bio}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                {/* Speaker Card Container */}
+                                <div className="w-full relative overflow-hidden bg-ted-black aspect-3/4.5 rounded-3xl shadow-[0_20px_40px_-12px_rgba(0,0,0,0.5)] border border-white/10 group-hover:border-ted-red/30 transition-colors duration-500">
 
                                     {/* Image with filters */}
                                     <img
                                         src={speaker.image}
                                         alt={speaker.name}
-                                        className="w-full h-full object-cover filter grayscale brightness-75 contrast-110 group-hover:grayscale-0 group-hover:scale-105 group-hover:brightness-100 transition-all duration-1000 ease-out"
+                                        className="absolute inset-0 w-full h-full object-cover filter grayscale-[0.5] brightness-[0.6] contrast-110 group-hover:grayscale-0 group-hover:scale-105 group-hover:brightness-90 transition-all duration-1000 ease-out"
                                     />
-                                </div>
 
-                                {/* Info Section */}
-                                <div className="flex flex-col px-1">
-                                    <p className="text-ted-red text-[10px] font-heading font-black uppercase tracking-[0.2em] mb-2">
-                                        {speaker.role}
-                                    </p>
-                                    <h4 className="text-xl md:text-2xl font-heading font-bold text-white group-hover:text-ted-red transition-colors duration-500 tracking-tight">
-                                        {speaker.name}
-                                    </h4>
+                                    {/* Bio Overlay (shown on hover for desktop, or on click for mobile) */}
+                                    <div className={`absolute inset-x-0 top-0 bottom-[130px] bg-ted-black/95 backdrop-blur-md z-40 transition-all duration-500 flex flex-col p-8 rounded-t-3xl border-b border-white/5 ${activeBio === speaker.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none md:group-hover:opacity-100 md:group-hover:translate-y-0 md:group-hover:pointer-events-auto'}`}>
+                                        <div className="flex justify-between items-center mb-4">
+                                            <p className="text-ted-red text-[11px] font-heading font-black uppercase tracking-[0.4em]">Speaker Bio</p>
+                                            <button
+                                                onClick={() => setActiveBio(null)}
+                                                className="p-1 text-white/40 hover:text-white transition-colors md:hidden"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+                                            </button>
+                                        </div>
+                                        <div className="overflow-y-auto pr-3 custom-scrollbar flex-1">
+                                            <p className="text-[14px] font-sans text-white/90 leading-relaxed font-light italic">
+                                                "{speaker.bio}"
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Permanent Bottom Info Overlay */}
+                                    <div className="absolute inset-x-0 bottom-0 h-[160px] bg-linear-to-t from-ted-black via-ted-black/95 to-transparent z-10 pointer-events-none" />
+
+                                    <div className="absolute bottom-0 left-0 right-0 p-6 z-30 transition-transform duration-500 group-hover:translate-y-[-2px]">
+                                        <div className="flex justify-between items-end gap-2">
+                                            <div className="flex-1">
+                                                <p className="text-ted-red text-[10px] font-heading font-black uppercase tracking-[0.2em] mb-2">
+                                                    {speaker.role}
+                                                </p>
+                                                <h4 className="text-2xl font-heading font-bold text-white tracking-tight mb-1">
+                                                    {speaker.name}
+                                                </h4>
+                                                <p className="text-sm font-sans font-medium text-white/70 leading-tight">
+                                                    {speaker.topic}
+                                                </p>
+                                            </div>
+                                            {/* Bio Toggle Button for Mobile */}
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setActiveBio(activeBio === speaker.id ? null : speaker.id);
+                                                }}
+                                                className="md:hidden pointer-events-auto p-3.5 rounded-xl bg-white/10 text-white/90 backdrop-blur-md border border-white/10 hover:bg-ted-red hover:text-white transition-all duration-300"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></svg>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </motion.div>
                         ))}
-
                     </div>
                 </div>
             </div>
