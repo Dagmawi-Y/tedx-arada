@@ -46,9 +46,9 @@ export default function Hero() {
                             initial={{ x: '5%', opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: '-5%', opacity: 0 }}
-                            transition={{ duration: 2, ease: "easeInOut" }}
-                            style={{ y }}
-                            className="absolute inset-x-0 -top-[10%] -bottom-[10%]"
+                            transition={{ duration: 1.5, ease: "easeInOut" }}
+                            style={{ y, translateZ: 0 }}
+                            className="absolute inset-x-0 -top-[20%] -bottom-[20%] will-change-transform"
                         >
                             <div className="absolute inset-0 bg-ted-black/75 z-10" />
                             <div className="absolute inset-0 bg-radial-vignette z-20" />
@@ -75,12 +75,12 @@ export default function Hero() {
                     className="relative max-w-5xl"
                 >
                     <h1 className="sr-only">TEDxArada: Ideas worth spreading from Addis Ababa, Ethiopia</h1>
-                    <h2 className="font-sans text-[11px] md:text-sm text-white/80 tracking-[0.5em] uppercase mb-4 md:mb-6 drop-shadow-md">
+                    <h2 className="font-sans text-[11px] md:text-sm text-white/80 tracking-[0.5em] uppercase mb-4 md:mb-6">
                         Ideas worth spreading.
                     </h2>
-                    <p className="font-heading text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-white font-bold leading-[1.1] drop-shadow-2xl tracking-tight uppercase">
+                    <p className="font-heading text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-white font-bold leading-[1.1] tracking-tight uppercase">
                         From The Heart of <br className="hidden md:block" />
-                        <span className="text-transparent bg-clip-text bg-linear-to-r from-ted-red to-red-500 italic block mt-2 normal-case">Addis Ababa.</span>
+                        <span className="text-transparent bg-clip-text bg-linear-to-r from-ted-red to-red-500 italic block mt-2 normal-case pb-2">Addis Ababa.</span>
                     </p>
                 </motion.div>
 

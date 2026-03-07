@@ -83,9 +83,9 @@ export default function Schedule() {
                         opacity: [0.05, 0.1, 0.05],
                         scale: [1, 1.15, 1],
                         x: [0, -30, 0]
-                    }}
+                    } as any}
                     transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-1/3 -right-40 w-[800px] h-[800px] bg-ted-red rounded-full blur-[180px]"
+                    className="absolute top-1/3 -right-40 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(230,43,30,0.15)_0%,transparent_70%)] rounded-full translate-z-0"
                 />
 
                 <motion.div
@@ -93,9 +93,9 @@ export default function Schedule() {
                         opacity: [0.03, 0.07, 0.03],
                         scale: [1, 1.1, 1],
                         y: [0, 40, 0]
-                    }}
+                    } as any}
                     transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -bottom-20 -left-60 w-[700px] h-[700px] bg-ted-red rounded-full blur-[160px]"
+                    className="absolute -bottom-20 -left-60 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(230,43,30,0.1)_0%,transparent_70%)] rounded-full translate-z-0"
                 />
 
                 {/* 3. Global Noise Texture */}

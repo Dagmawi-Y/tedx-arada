@@ -6,8 +6,8 @@ export default function About() {
         <section className="min-h-svh flex flex-col justify-center py-24 md:py-40 bg-ted-black relative z-10 border-t border-white/5 overflow-hidden">
             {/* Background Life */}
             <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-ted-red/10 rounded-full blur-[150px] opacity-70 transform translate-x-1/3 -translate-y-1/3" />
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-red-900/20 rounded-full blur-[120px] opacity-50 transform -translate-x-1/3 translate-y-1/3" />
+                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(230,43,30,0.15)_0%,transparent_70%)] rounded-full opacity-70 transform translate-x-1/3 -translate-y-1/3" />
+                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(127,29,29,0.25)_0%,transparent_70%)] rounded-full opacity-50 transform -translate-x-1/3 translate-y-1/3" />
                 <div className="absolute inset-0 opacity-[0.6]" style={{ backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.3) 1.5px, transparent 0)', backgroundSize: '48px 48px', maskImage: 'radial-gradient(circle at center, black, transparent 80%)' }} />
             </div>
 

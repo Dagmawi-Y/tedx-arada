@@ -64,9 +64,9 @@ export default function Speakers() {
                         scale: [1, 1.2, 1],
                         x: [0, 50, 0],
                         y: [0, 30, 0]
-                    }}
+                    } as any}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-ted-red/10 rounded-full blur-[120px]"
+                    className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(230,43,30,0.15)_0%,transparent_70%)] rounded-full translate-z-0"
                 />
 
                 <div
