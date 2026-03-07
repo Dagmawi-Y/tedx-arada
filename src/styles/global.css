@@ -42,4 +42,8 @@
     background: #e62b1e;
     border-radius: 10px;
   }
+  .content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 100vh;
+  }
 }

@@ -51,7 +51,7 @@ export default function Schedule() {
 
     return (
         <section className="py-24 md:py-40 bg-ted-black border-t border-white/5 relative overflow-hidden">
-            {/* Base Background Texture */}
+            {/* Base Background Texture - Optimized by replacing maskImage with radial overlay */}
             <div className="absolute inset-0 z-0">
                 {/* 1. Refined Blueprint-Style Cross Grid */}
                 <div
@@ -61,8 +61,7 @@ export default function Schedule() {
                             linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
                             linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
                         `,
-                        backgroundSize: '60px 60px',
-                        maskImage: 'radial-gradient(circle at center, black, transparent 90%)'
+                        backgroundSize: '60px 60px'
                     }}
                 />
                 <div
@@ -72,35 +71,34 @@ export default function Schedule() {
                             linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
                             linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)
                         `,
-                        backgroundSize: '15px 15px',
-                        maskImage: 'radial-gradient(circle at center, black, transparent 90%)'
+                        backgroundSize: '15px 15px'
                     }}
                 />
+                {/* Unified radial overlay for masking effect */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,1)_95%)]" />
 
                 {/* 2. Floating 'Pulse' Blobs (Subtle Movement) */}
                 <motion.div
                     animate={{
                         opacity: [0.05, 0.1, 0.05],
-                        scale: [1, 1.15, 1],
-                        x: [0, -30, 0]
+                        scale: [1, 1.1, 1]
                     } as any}
                     transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-1/3 -right-40 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(230,43,30,0.15)_0%,transparent_70%)] rounded-full translate-z-0"
+                    className="absolute top-1/3 -right-40 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(230,43,30,0.15)_0%,transparent_70%)] rounded-full will-change-[transform,opacity]"
                 />
 
                 <motion.div
                     animate={{
                         opacity: [0.03, 0.07, 0.03],
-                        scale: [1, 1.1, 1],
-                        y: [0, 40, 0]
+                        scale: [1, 1.1, 1]
                     } as any}
                     transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -bottom-20 -left-60 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(230,43,30,0.1)_0%,transparent_70%)] rounded-full translate-z-0"
+                    className="absolute -bottom-20 -left-60 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(230,43,30,0.1)_0%,transparent_70%)] rounded-full will-change-[transform,opacity]"
                 />
 
                 {/* 3. Global Noise Texture */}
                 <div
-                    className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay"
+                    className="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-screen"
                     style={{
                         backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')`,
                     }}
