@@ -1,5 +1,5 @@
 import { Stack, router } from 'expo-router';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { Button } from '@/components/ui/base/button';
 import { Glow } from '@/components/ui/base/glow';
 import { Title } from '@/components/ui/base/title';
@@ -9,12 +9,12 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Home() {
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-ted-black">
       <Stack.Screen options={{ headerShown: false }} />
-      <View style={styles.content}>
-        <View style={styles.logoSection}>
-          {/* Mock Logo or Icon */}
-          <View style={styles.logoCircle}>
+      <View className="flex-1 justify-center items-center p-5">
+        <View className="items-center mb-16">
+          {/* Logo Section */}
+          <View className="w-24 h-24 rounded-full bg-ted-dark justify-center items-center mb-5 border border-white/10">
             <MaterialCommunityIcons name="microphone-variant" size={48} color={TED_COLORS.red} />
           </View>
           <Title size={32} weight="bold" color={TED_COLORS.white}>
@@ -25,8 +25,8 @@ export default function Home() {
           </Subtitle>
         </View>
 
-        <Glow size={4} color={TED_COLORS.red} secondaryColor={TED_COLORS.accent}>
-          <View style={styles.buttonWrapper}>
+        <View className="mt-5">
+          <Glow size={4} color={TED_COLORS.red} secondaryColor={TED_COLORS.accent} radius={30}>
             <Button
               onPress={() => router.push('/scan')}
               backgroundColor={TED_COLORS.red}
@@ -34,55 +34,14 @@ export default function Home() {
               height={60}
               borderRadius={30}
             >
-              <View style={styles.buttonContent}>
-                <MaterialCommunityIcons name="qrcode-scan" size={24} color={TED_COLORS.white} style={{ marginRight: 10 }} />
-                <Text style={styles.buttonText}>Start Scanning</Text>
+              <View className="flex-row items-center justify-center">
+                <MaterialCommunityIcons name="qrcode-scan" size={24} color={TED_COLORS.white} className="mr-2" />
+                <Text className="text-white text-lg font-bold">Start Scanning</Text>
               </View>
             </Button>
-          </View>
-        </Glow>
+          </Glow>
+        </View>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: TED_COLORS.black,
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  logoSection: {
-    alignItems: 'center',
-    marginBottom: 60,
-  },
-  logoCircle: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: TED_COLORS.dark,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
-  },
-  buttonWrapper: {
-    marginTop: 20,
-  },
-  buttonContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: TED_COLORS.white,
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});

@@ -9,9 +9,9 @@ import { Toast } from '@/components/ui/molecules/Toast';
 import { CircleLoadingIndicator } from '@/components/ui/molecules/circle-loader';
 import { Title } from '@/components/ui/base/title';
 import { Subtitle } from '@/components/ui/base/subtitle/Subtitle';
-import Animated, { FadeIn, FadeOut, ZoomIn, useAnimatedStyle, withRepeat, withTiming, withSequence } from 'react-native-reanimated';
+import Animated, { FadeIn, FadeOut, ZoomIn } from 'react-native-reanimated';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 const SCAN_AREA_SIZE = width * 0.7;
 
 export default function ScanScreen() {
@@ -30,7 +30,7 @@ export default function ScanScreen() {
 
   if (!permission) {
     return (
-      <View style={styles.centered}>
+      <View className="flex-1 bg-ted-black justify-center items-center p-5">
         <CircleLoadingIndicator dotColor={TED_COLORS.red} />
       </View>
     );
@@ -38,16 +38,19 @@ export default function ScanScreen() {
 
   if (!permission.granted) {
     return (
-      <View style={styles.centered}>
+      <View className="flex-1 bg-ted-black justify-center items-center p-5">
         <MaterialCommunityIcons name="camera-off" size={64} color={TED_COLORS.red} />
         <Title size={24} color={TED_COLORS.white} weight="bold" style={{ marginTop: 20 }}>
           Camera Access Required
         </Title>
-        <Subtitle size={16} style={{ textAlign: 'center', marginTop: 10, paddingHorizontal: 40 }}>
+        <Subtitle size={16} style={{ textAlign: 'center', marginTop: 10, paddingHorizontal: 40, color: '#fff' }}>
           We need your permission to show the camera for scanning attendee QR codes.
         </Subtitle>
-        <TouchableOpacity style={styles.permissionButton} onPress={requestPermission}>
-          <Text style={styles.permissionButtonText}>Grant Permission</Text>
+        <TouchableOpacity 
+          className="mt-8 bg-ted-red px-8 py-4 rounded-full"
+          onPress={requestPermission}
+        >
+          <Text className="text-white font-bold text-lg">Grant Permission</Text>
         </TouchableOpacity>
       </View>
     );
@@ -56,13 +59,11 @@ export default function ScanScreen() {
   const handleBarCodeScanned = ({ type, data }: { type: string; data: string }) => {
     if (processing || scanned) return;
     
-    // Simple debounce to avoid double scans
     if (data === lastScannedCode.current) return;
     lastScannedCode.current = data;
 
     setProcessing(true);
     
-    // Simulate a slight delay for better UX (so it doesn't just flash)
     setTimeout(() => {
       const result = checkIn(data);
       setProcessing(false);
@@ -80,7 +81,6 @@ export default function ScanScreen() {
         });
       }
 
-      // Reset after 3 seconds to allow next scan
       setTimeout(() => {
         setScanned(false);
         lastScannedCode.current = null;
@@ -89,7 +89,7 @@ export default function ScanScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-ted-black">
       <Stack.Screen options={{ headerShown: false }} />
       
       <CameraView
@@ -100,43 +100,54 @@ export default function ScanScreen() {
           barcodeTypes: ['qr'],
         }}
       >
-        <View style={styles.overlay}>
+        <View className="flex-1 bg-black/50 justify-between">
           {/* Top Bar */}
-          <View style={styles.topBar}>
-            <Pressable onPress={() => router.back()} style={styles.backButton}>
+          <View className="flex-row items-center justify-between pt-16 px-5 pb-5">
+            <Pressable 
+              onPress={() => router.back()} 
+              className="w-11 h-11 rounded-full bg-white/10 justify-center items-center"
+            >
               <MaterialCommunityIcons name="chevron-left" size={32} color={TED_COLORS.white} />
             </Pressable>
             <Title size={20} color={TED_COLORS.white} weight="bold">
               Scan Ticket
             </Title>
-            <View style={{ width: 32 }} />
+            <View className="w-8" />
           </View>
 
           {/* Scanner Frame */}
-          <View style={styles.scannerWrapper}>
-            <View style={styles.scannerFrame}>
-              <View style={[styles.corner, styles.topLeft]} />
-              <View style={[styles.corner, styles.topRight]} />
-              <View style={[styles.corner, styles.bottomLeft]} />
-              <View style={[styles.corner, styles.bottomRight]} />
+          <View className="flex-1 justify-center items-center">
+            <View style={{ width: SCAN_AREA_SIZE, height: SCAN_AREA_SIZE }} className="relative bg-transparent">
+              {/* Corners */}
+              <View className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-ted-red rounded-tl-xl" />
+              <View className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-ted-red rounded-tr-xl" />
+              <View className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-ted-red rounded-bl-xl" />
+              <View className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-ted-red rounded-br-xl" />
               
               {/* Scan Line Animation */}
               {!scanned && !processing && (
                 <Animated.View 
                   entering={FadeIn}
                   exiting={FadeOut}
-                  style={styles.scanLine}
+                  className="absolute w-full h-0.5 bg-ted-red top-1/2"
+                  style={{
+                    shadowColor: TED_COLORS.red,
+                    shadowOffset: { width: 0, height: 0 },
+                    shadowOpacity: 0.8,
+                    shadowRadius: 10,
+                    elevation: 10,
+                  }}
                 />
               )}
 
               {processing && (
-                <View style={styles.processingOverlay}>
+                <View className="absolute inset-0 bg-black/40 justify-center items-center rounded-xl">
                   <CircleLoadingIndicator dotColor={TED_COLORS.red} />
                 </View>
               )}
               
               {scanned && (
-                <Animated.View entering={ZoomIn} style={styles.statusOverlay}>
+                <Animated.View entering={ZoomIn} className="absolute inset-0 bg-black/60 justify-center items-center rounded-xl">
                    <MaterialCommunityIcons 
                     name={lastScannedCode.current ? 'check-circle' : 'alert-circle'} 
                     size={80} 
@@ -148,7 +159,7 @@ export default function ScanScreen() {
           </View>
 
           {/* Bottom Instructions */}
-          <View style={styles.footer}>
+          <View className="p-10 pb-16 bg-black/70">
             <Subtitle size={16} style={{ textAlign: 'center', color: TED_COLORS.white }}>
               Position the QR code within the frame to automatically check in the attendee.
             </Subtitle>
@@ -158,127 +169,3 @@ export default function ScanScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: TED_COLORS.black,
-  },
-  centered: {
-    flex: 1,
-    backgroundColor: TED_COLORS.black,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'space-between',
-  },
-  topBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingTop: 60,
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-  },
-  backButton: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  scannerWrapper: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  scannerFrame: {
-    width: SCAN_AREA_SIZE,
-    height: SCAN_AREA_SIZE,
-    borderWidth: 0,
-    position: 'relative',
-    backgroundColor: 'transparent',
-  },
-  corner: {
-    position: 'absolute',
-    width: 30,
-    height: 30,
-    borderColor: TED_COLORS.red,
-  },
-  topLeft: {
-    top: 0,
-    left: 0,
-    borderTopWidth: 4,
-    borderLeftWidth: 4,
-    borderTopLeftRadius: 12,
-  },
-  topRight: {
-    top: 0,
-    right: 0,
-    borderTopWidth: 4,
-    borderRightWidth: 4,
-    borderTopRightRadius: 12,
-  },
-  bottomLeft: {
-    bottom: 0,
-    left: 0,
-    borderBottomWidth: 4,
-    borderLeftWidth: 4,
-    borderBottomLeftRadius: 12,
-  },
-  bottomRight: {
-    bottom: 0,
-    right: 0,
-    borderBottomWidth: 4,
-    borderRightWidth: 4,
-    borderBottomRightRadius: 12,
-  },
-  scanLine: {
-    position: 'absolute',
-    width: '100%',
-    height: 2,
-    backgroundColor: TED_COLORS.red,
-    top: '50%',
-    shadowColor: TED_COLORS.red,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 10,
-    elevation: 10,
-  },
-  processingOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 12,
-  },
-  statusOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.6)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 12,
-  },
-  footer: {
-    padding: 40,
-    paddingBottom: 60,
-    backgroundColor: 'rgba(0,0,0,0.7)',
-  },
-  permissionButton: {
-    marginTop: 30,
-    backgroundColor: TED_COLORS.red,
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-    borderRadius: 30,
-  },
-  permissionButtonText: {
-    color: TED_COLORS.white,
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-});
