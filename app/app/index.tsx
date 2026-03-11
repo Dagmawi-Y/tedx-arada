@@ -1,7 +1,6 @@
 import { Stack, router } from 'expo-router';
-import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Button } from '@/components/ui/base/button';
-import { Container } from '@/components/Container';
 import { Glow } from '@/components/ui/base/glow';
 import { Title } from '@/components/ui/base/title';
 import { Subtitle } from '@/components/ui/base/subtitle/Subtitle';
@@ -42,10 +41,6 @@ export default function Home() {
             </Button>
           </View>
         </Glow>
-        
-        <Pressable style={styles.settingsLink} onPress={() => router.push('/demo')}>
-          <Text style={styles.settingsText}>View UI Demo</Text>
-        </Pressable>
       </View>
     </View>
   );
@@ -89,13 +84,5 @@ const styles = StyleSheet.create({
     color: TED_COLORS.white,
     fontSize: 18,
     fontWeight: 'bold',
-  },
-  settingsLink: {
-    marginTop: 40,
-    padding: 10,
-  },
-  settingsText: {
-    color: 'rgba(255,255,255,0.4)',
-    fontSize: 14,
   },
 });
