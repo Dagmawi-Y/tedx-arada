@@ -11,7 +11,7 @@ import { Title } from '@/components/ui/base/title';
 import { Subtitle } from '@/components/ui/base/subtitle/Subtitle';
 import Animated, { FadeIn, FadeOut, ZoomIn } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
-import { Audio } from 'expo-av';
+import { useAudioPlayer } from 'expo-audio';
 
 const { width } = Dimensions.get('window');
 const SCAN_AREA_SIZE = width * 0.7;
@@ -24,35 +24,10 @@ export default function ScanScreen() {
   
   const lastScannedCode = useRef<string | null>(null);
 
-  // Sound refs for zero-latency playback
-  const successSound = useRef<Audio.Sound | null>(null);
-  const warningSound = useRef<Audio.Sound | null>(null);
-  const errorSound = useRef<Audio.Sound | null>(null);
-
-  useEffect(() => {
-    // Pre-load sounds on mount
-    const loadSounds = async () => {
-      try {
-        const { sound: sSuccess } = await Audio.Sound.createAsync(require('@/assets/sounds/success.wav'));
-        const { sound: sWarning } = await Audio.Sound.createAsync(require('@/assets/sounds/warning.wav'));
-        const { sound: sError } = await Audio.Sound.createAsync(require('@/assets/sounds/error.wav'));
-        
-        successSound.current = sSuccess;
-        warningSound.current = sWarning;
-        errorSound.current = sError;
-      } catch (e) {
-        console.log('Error pre-loading sounds:', e);
-      }
-    };
-
-    loadSounds();
-
-    return () => {
-      successSound.current?.unloadAsync();
-      warningSound.current?.unloadAsync();
-      errorSound.current?.unloadAsync();
-    };
-  }, []);
+  // Sound players for zero-latency playback (SDK 54 expo-audio)
+  const successPlayer = useAudioPlayer(require('@/assets/sounds/success.wav'));
+  const warningPlayer = useAudioPlayer(require('@/assets/sounds/warning.wav'));
+  const errorPlayer = useAudioPlayer(require('@/assets/sounds/error.wav'));
 
   useEffect(() => {
     if (!permission) {
@@ -64,18 +39,20 @@ export default function ScanScreen() {
     try {
       if (type === 'success') {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-        await successSound.current?.replayAsync();
+        successPlayer.seekTo(0);
+        successPlayer.play();
       } else if (type === 'warning') {
-        // Satisfaction: Double medium impact for "already checked in"
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         setTimeout(() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium), 100);
-        await warningSound.current?.replayAsync();
+        warningPlayer.seekTo(0);
+        warningPlayer.play();
       } else {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-        await errorSound.current?.replayAsync();
+        errorPlayer.seekTo(0);
+        errorPlayer.play();
       }
     } catch (e) {
-      console.log('Error playing sound:', e);
+      console.log('Error playing feedback:', e);
     }
   };
 

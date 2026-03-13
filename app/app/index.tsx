@@ -82,7 +82,7 @@ export default function Home() {
           >
             <MaterialCommunityIcons name="account-group-outline" size={22} color={TED_COLORS.black} />
             <Text className="ml-3 font-bold text-base text-ted-black">
-              Manage Attendees
+              Attendees
             </Text>
           </Pressable>
         </View>
