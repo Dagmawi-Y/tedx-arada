@@ -23,11 +23,9 @@ import Animated, {
 } from "react-native-reanimated";
 import { scheduleOnRN } from "react-native-worklets";
 
-if (Platform.OS === "android") {
-  if (UIManager.setLayoutAnimationEnabledExperimental) {
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-  }
-}
+// UIManager.setLayoutAnimationEnabledExperimental is a no-op in New Architecture
+// and causes warnings. It is no longer needed.
+
 
 interface ToastProps {
   toast: ToastType;
