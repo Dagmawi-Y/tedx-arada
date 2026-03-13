@@ -22,10 +22,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { scheduleOnRN } from "react-native-worklets";
-
-// UIManager.setLayoutAnimationEnabledExperimental is a no-op in New Architecture
-// and causes warnings. It is no longer needed.
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface ToastProps {
   toast: ToastType;
@@ -36,32 +33,33 @@ interface ToastProps {
 const getBackgroundColor = (type: ToastVariant) => {
   switch (type) {
     case "success":
-      return "#059669"; // Vibrant emerald green
+      return "#10B981"; // Modern Emerald
     case "error":
-      return "#E62B1E"; // TED Red
+      return "#EF4444"; // Modern Red
     case "warning":
-      return "#D97706"; // Amber
+      return "#F59E0B"; // Modern Amber
     case "info":
-      return "#2563EB"; // Vibrant blue
+      return "#3B82F6"; // Modern Blue
     default:
-      return "#262626"; // Dark gray
+      return "#1F2937"; // Dark Gray
   }
 };
 
-const getIconForType = (type: ToastVariant) => {
+const getIconNameForType = (type: ToastVariant): keyof typeof MaterialCommunityIcons.glyphMap => {
   switch (type) {
     case "success":
-      return "✅";
+      return "check-circle";
     case "error":
-      return "❌";
+      return "close-circle";
     case "warning":
-      return "⚠️";
+      return "alert";
     case "info":
-      return "ℹ️";
+      return "information";
     default:
-      return "";
+      return "bell-outline";
   }
 };
+
 export const Toast: React.FC<ToastProps> = ({ toast, index }) => {
   const prevContentRef = useRef<string | React.ReactNode | null>(null);
   const prevTypeRef = useRef<ToastVariant | null>(null);
@@ -276,7 +274,7 @@ export const Toast: React.FC<ToastProps> = ({ toast, index }) => {
 
   const _styles = toast.options?.style || {};
 
-  const icon = getIconForType(toast.options.type);
+  const iconName = getIconNameForType(toast.options.type);
 
   const renderExpandedContent = () => {
     if (!hasExpandedContent) return null;
@@ -311,7 +309,9 @@ export const Toast: React.FC<ToastProps> = ({ toast, index }) => {
         android_ripple={{ color: "rgba(255, 255, 255, 0.1)" }}
       >
         <View style={styles.mainContent}>
-          {icon ? <Text style={styles.icon}>{icon}</Text> : null}
+          <View style={styles.iconContainer}>
+            <MaterialCommunityIcons name={iconName} size={20} color="#fff" />
+          </View>
           <View style={styles.contentContainer}>
             {typeof toast.content === "string" ? (
               <Text style={styles.text}>{toast.content}</Text>
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
     maxWidth: 400,
     alignSelf: "center",
     marginVertical: 4,
-    borderRadius: 100,
+    borderRadius: 24, // More rounded but not pills
     overflow: "hidden",
     shadowColor: "#000",
     shadowOffset: {
@@ -364,41 +364,38 @@ const styles = StyleSheet.create({
   },
   toast: {
     flexDirection: "column",
-    borderRadius: 12,
   },
   mainContent: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 16,
+    padding: 14,
   },
-  icon: {
-    color: "#fff",
-    fontSize: 20,
-    marginRight: 12,
-    fontWeight: "bold",
-    textAlign: "center",
-    width: 24,
+  iconContainer: {
+    marginRight: 10,
+    backgroundColor: 'rgba(255,255,255,0.15)',
+    padding: 6,
+    borderRadius: 12,
   },
   contentContainer: {
     flex: 1,
   },
   text: {
     color: "#fff",
-    fontSize: 16,
-    fontWeight: "500",
+    fontSize: 15,
+    fontWeight: "600",
     lineHeight: 20,
   },
   actionButton: {
     paddingHorizontal: 12,
     paddingVertical: 8,
-    borderRadius: 6,
+    borderRadius: 8,
     backgroundColor: "rgba(255, 255, 255, 0.2)",
     marginLeft: 12,
   },
   actionText: {
     color: "#fff",
-    fontSize: 14,
-    fontWeight: "600",
+    fontSize: 13,
+    fontWeight: "700",
   },
   expandedContent: {
     overflow: "hidden",
