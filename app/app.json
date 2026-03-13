@@ -1,9 +1,9 @@
 {
   "expo": {
     "name": "TEDx Arada",
-    "slug": "app",
+    "slug": "TEDxArada",
     "version": "1.0.0",
-    "scheme": "app",
+    "scheme": "tedx-arada",
     "platforms": [
       "ios",
       "android"
@@ -34,14 +34,24 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.dagmawi-y.app"
+      "bundleIdentifier": "com.dagmawi-y.tedx-arada"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/logo-black.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.dagmawi_y.app"
+      "package": "com.dagmawi_y.tedx_arada",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "988d250d-6c8b-4b2a-a758-fedc4c89ba13"
+      }
     }
   }
 }
