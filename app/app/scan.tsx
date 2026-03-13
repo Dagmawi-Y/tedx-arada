@@ -10,6 +10,8 @@ import { CircleLoadingIndicator } from '@/components/ui/molecules/circle-loader'
 import { Title } from '@/components/ui/base/title';
 import { Subtitle } from '@/components/ui/base/subtitle/Subtitle';
 import Animated, { FadeIn, FadeOut, ZoomIn } from 'react-native-reanimated';
+import * as Haptics from 'expo-haptics';
+import { Audio } from 'expo-av';
 
 const { width } = Dimensions.get('window');
 const SCAN_AREA_SIZE = width * 0.7;
@@ -22,11 +24,60 @@ export default function ScanScreen() {
   
   const lastScannedCode = useRef<string | null>(null);
 
+  // Sound refs for zero-latency playback
+  const successSound = useRef<Audio.Sound | null>(null);
+  const warningSound = useRef<Audio.Sound | null>(null);
+  const errorSound = useRef<Audio.Sound | null>(null);
+
+  useEffect(() => {
+    // Pre-load sounds on mount
+    const loadSounds = async () => {
+      try {
+        const { sound: sSuccess } = await Audio.Sound.createAsync(require('@/assets/sounds/success.wav'));
+        const { sound: sWarning } = await Audio.Sound.createAsync(require('@/assets/sounds/warning.wav'));
+        const { sound: sError } = await Audio.Sound.createAsync(require('@/assets/sounds/error.wav'));
+        
+        successSound.current = sSuccess;
+        warningSound.current = sWarning;
+        errorSound.current = sError;
+      } catch (e) {
+        console.log('Error pre-loading sounds:', e);
+      }
+    };
+
+    loadSounds();
+
+    return () => {
+      successSound.current?.unloadAsync();
+      warningSound.current?.unloadAsync();
+      errorSound.current?.unloadAsync();
+    };
+  }, []);
+
   useEffect(() => {
     if (!permission) {
       requestPermission();
     }
   }, [permission]);
+
+  const playFeedback = async (type: 'success' | 'warning' | 'error') => {
+    try {
+      if (type === 'success') {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        await successSound.current?.replayAsync();
+      } else if (type === 'warning') {
+        // Satisfaction: Double medium impact for "already checked in"
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        setTimeout(() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium), 100);
+        await warningSound.current?.replayAsync();
+      } else {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+        await errorSound.current?.replayAsync();
+      }
+    } catch (e) {
+      console.log('Error playing sound:', e);
+    }
+  };
 
   if (!permission) {
     return (
@@ -64,21 +115,45 @@ export default function ScanScreen() {
 
     setProcessing(true);
     
-    setTimeout(() => {
-      const result = checkIn(data);
+    // Quick haptic feedback for initial scan pickup
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+
+    setTimeout(async () => {
+      let attendeeId = data;
+      try {
+        const parsedData = JSON.parse(data);
+        if (parsedData.id) {
+          attendeeId = parsedData.id.toString();
+        }
+      } catch (e) {
+        // It's not JSON, so treat the entire data string as the ID
+      }
+      
+      const result = checkIn(attendeeId);
       setProcessing(false);
       setScanned(true);
 
       if (result.success) {
+        playFeedback('success');
         Toast.show(`Checked in: ${result.attendee?.name}`, {
           type: 'success',
           position: 'top',
         });
       } else {
-        Toast.show(result.message, {
-          type: 'error',
-          position: 'top',
-        });
+        // Evaluate failure reasons for different haptic/sound
+        if (result.message.includes('already checked in')) {
+           playFeedback('warning');
+           Toast.show(`Already in: ${result.attendee?.name}`, {
+             type: 'warning',
+             position: 'top',
+           });
+        } else {
+           playFeedback('error');
+           Toast.show(result.message, {
+             type: 'error',
+             position: 'top',
+           });
+        }
       }
 
       setTimeout(() => {

@@ -1,6 +1,22 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { persist, createJSONStorage, StateStorage } from 'zustand/middleware';
+import { createMMKV } from 'react-native-mmkv';
+
+const storage = createMMKV();
+
+// Build custom storage wrapper for Zustand
+const zustandStorage: StateStorage = {
+  setItem: (name, value) => {
+    return storage.set(name, value);
+  },
+  getItem: (name) => {
+    const value = storage.getString(name);
+    return value ?? null;
+  },
+  removeItem: (name) => {
+    storage.remove(name);
+  },
+};
 
 export type AttendeeStatus = 'applied' | 'selected' | 'checked_in';
 
@@ -18,14 +34,10 @@ interface CheckInState {
   reset: () => void;
 }
 
-// Initial mock data
-const INITIAL_DATA: Attendee[] = [
-  { id: 'TX-001', name: 'Dagmawi Yohannes', email: 'dag@example.com', status: 'selected' },
-  { id: 'TX-002', name: 'Melat Teshome', email: 'melat@example.com', status: 'selected' },
-  { id: 'TX-003', name: 'Amadou Diallo', email: 'amadou@example.com', status: 'selected' },
-  { id: 'TX-004', name: 'Zewidu Alemu', email: 'zewidu@example.com', status: 'applied' },
-  { id: 'TX-005', name: 'Eden Habte', email: 'eden@example.com', status: 'checked_in' },
-];
+import attendeesData from '@/constants/attendees.json';
+
+// Initial data from the parsed CSV
+const INITIAL_DATA: Attendee[] = attendeesData as Attendee[];
 
 export const useCheckInStore = create<CheckInState>()(
   persist(
@@ -59,8 +71,8 @@ export const useCheckInStore = create<CheckInState>()(
       reset: () => set({ attendees: INITIAL_DATA }),
     }),
     {
-      name: 'check-in-storage',
-      storage: createJSONStorage(() => AsyncStorage),
+      name: 'check-in-mmkv-storage',
+      storage: createJSONStorage(() => zustandStorage),
     }
   )
 );

@@ -36,28 +36,28 @@ interface ToastProps {
 const getBackgroundColor = (type: ToastVariant) => {
   switch (type) {
     case "success":
-      return "#10B981";
+      return "#059669"; // Vibrant emerald green
     case "error":
-      return "#EF4444";
+      return "#E62B1E"; // TED Red
     case "warning":
-      return "#F59E0B";
+      return "#D97706"; // Amber
     case "info":
-      return "#3B82F6";
+      return "#2563EB"; // Vibrant blue
     default:
-      return "#262626";
+      return "#262626"; // Dark gray
   }
 };
 
 const getIconForType = (type: ToastVariant) => {
   switch (type) {
     case "success":
-      return "✓";
+      return "✅";
     case "error":
-      return "✗";
+      return "❌";
     case "warning":
-      return "⚠";
+      return "⚠️";
     case "info":
-      return "ℹ";
+      return "ℹ️";
     default:
       return "";
   }
