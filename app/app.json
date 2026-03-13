@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "app",
+    "name": "TEDx Arada",
     "slug": "app",
     "version": "1.0.0",
     "scheme": "app",
@@ -21,7 +21,7 @@
       "tsconfigPaths": true
     },
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/logo-black.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -37,7 +37,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/images/logo-black.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.dagmawi_y.app"

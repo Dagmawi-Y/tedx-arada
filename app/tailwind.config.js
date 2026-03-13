@@ -7,8 +7,8 @@ module.exports = {
     extend: {
       colors: {
         'ted-red': '#E62B1E',
-        'ted-black': '#000000',
-        'ted-dark': '#111111',
+        'ted-black': '#111111',
+        'ted-gray': '#F5F5F5',
         'arada-accent': '#D4AF37',
       },
     },

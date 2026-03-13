@@ -1,7 +1,7 @@
 import { Stack, router } from 'expo-router';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Pressable, Dimensions } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Pressable, Dimensions, StatusBar } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { TED_COLORS } from '@/constants/Colors';
 import { useCheckInStore } from '@/store/check-in-store';
@@ -89,19 +89,22 @@ export default function ScanScreen() {
 
   if (!permission.granted) {
     return (
-      <View className="flex-1 bg-ted-black justify-center items-center p-5">
-        <MaterialCommunityIcons name="camera-off" size={64} color={TED_COLORS.red} />
-        <Title size={24} color={TED_COLORS.white} weight="bold" style={{ marginTop: 20 }}>
-          Camera Access Required
+      <View className="flex-1 bg-white justify-center items-center p-8">
+        <StatusBar barStyle="dark-content" />
+        <View className="w-24 h-24 bg-red-50 rounded-full justify-center items-center mb-8">
+          <MaterialCommunityIcons name="camera-off" size={48} color={TED_COLORS.red} />
+        </View>
+        <Title size={28} color={TED_COLORS.black} weight="bold" style={{ textAlign: 'center' }}>
+          Camera Access
         </Title>
-        <Subtitle size={16} style={{ textAlign: 'center', marginTop: 10, paddingHorizontal: 40, color: '#fff' }}>
-          We need your permission to show the camera for scanning attendee QR codes.
+        <Subtitle size={16} style={{ textAlign: 'center', marginTop: 12, paddingHorizontal: 20, color: '#666', lineHeight: 24 }}>
+          To verify attendee credentials, we require access to your devices camera system.
         </Subtitle>
         <TouchableOpacity 
-          className="mt-8 bg-ted-red px-8 py-4 rounded-full"
+          className="mt-12 bg-ted-red px-10 py-5 rounded-full shadow-lg shadow-ted-red/30"
           onPress={requestPermission}
         >
-          <Text className="text-white font-bold text-lg">Grant Permission</Text>
+          <Text className="text-white font-bold text-lg uppercase tracking-widest">Enable Camera</Text>
         </TouchableOpacity>
       </View>
     );
@@ -164,7 +167,8 @@ export default function ScanScreen() {
   };
 
   return (
-    <View className="flex-1 bg-ted-black">
+    <View className="flex-1 bg-black">
+      <StatusBar barStyle="light-content" />
       <Stack.Screen options={{ headerShown: false }} />
       
       <CameraView
@@ -174,73 +178,73 @@ export default function ScanScreen() {
         barcodeScannerSettings={{
           barcodeTypes: ['qr'],
         }}
+      />
+
+      {/* UI Overlay positioned absolutely on top of the CameraView */}
+      <View 
+        style={StyleSheet.absoluteFillObject} 
+        className="justify-between" 
+        pointerEvents="box-none"
       >
-        <View className="flex-1 bg-black/50 justify-between">
-          {/* Top Bar */}
-          <View className="flex-row items-center justify-between pt-16 px-5 pb-5">
+        <View className="flex-1 bg-black/40 justify-between" pointerEvents="box-none">
+          {/* Top Bar - Still white for high contrast breadcrumb */}
+          <View className="flex-row items-center justify-between pt-16 px-5 pb-5 bg-white/95 rounded-b-[32px] shadow-xl">
             <Pressable 
               onPress={() => router.back()} 
-              className="w-11 h-11 rounded-full bg-white/10 justify-center items-center"
+              className="w-11 h-11 rounded-full bg-ted-gray justify-center items-center"
             >
-              <MaterialCommunityIcons name="chevron-left" size={32} color={TED_COLORS.white} />
+              <MaterialCommunityIcons name="close" size={24} color={TED_COLORS.black} />
             </Pressable>
-            <Title size={20} color={TED_COLORS.white} weight="bold">
-              Scan Ticket
-            </Title>
-            <View className="w-8" />
+            <Title size={20} color={TED_COLORS.black} weight="bold">Validate Ticket</Title>
+            <View className="w-11" />
           </View>
 
           {/* Scanner Frame */}
-          <View className="flex-1 justify-center items-center">
+          <View className="flex-1 justify-center items-center" pointerEvents="none">
             <View style={{ width: SCAN_AREA_SIZE, height: SCAN_AREA_SIZE }} className="relative bg-transparent">
-              {/* Corners */}
-              <View className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-ted-red rounded-tl-xl" />
-              <View className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-ted-red rounded-tr-xl" />
-              <View className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-ted-red rounded-bl-xl" />
-              <View className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-ted-red rounded-br-xl" />
+              {/* Corners - More rounded and premium */}
+              <View className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-ted-red rounded-tl-[32px]" />
+              <View className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-ted-red rounded-tr-[32px]" />
+              <View className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-ted-red rounded-bl-[32px]" />
+              <View className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-ted-red rounded-br-[32px]" />
               
               {/* Scan Line Animation */}
               {!scanned && !processing && (
-                <Animated.View 
-                  entering={FadeIn}
-                  exiting={FadeOut}
-                  className="absolute w-full h-0.5 bg-ted-red top-1/2"
-                  style={{
-                    shadowColor: TED_COLORS.red,
-                    shadowOffset: { width: 0, height: 0 },
-                    shadowOpacity: 0.8,
-                    shadowRadius: 10,
-                    elevation: 10,
-                  }}
+                <View 
+                  className="absolute w-full h-[1px] bg-ted-red/50 top-1/2"
                 />
               )}
 
               {processing && (
-                <View className="absolute inset-0 bg-black/40 justify-center items-center rounded-xl">
+                <View className="absolute inset-0 bg-white/10 justify-center items-center rounded-[32px]">
                   <CircleLoadingIndicator dotColor={TED_COLORS.red} />
                 </View>
               )}
               
               {scanned && (
-                <Animated.View entering={ZoomIn} className="absolute inset-0 bg-black/60 justify-center items-center rounded-xl">
+                <Animated.View entering={ZoomIn} className="absolute inset-0 bg-white/20 justify-center items-center rounded-[32px]">
                    <MaterialCommunityIcons 
                     name={lastScannedCode.current ? 'check-circle' : 'alert-circle'} 
                     size={80} 
-                    color={TED_COLORS.white} 
+                    color="white" 
                   />
                 </Animated.View>
               )}
             </View>
           </View>
 
-          {/* Bottom Instructions */}
-          <View className="p-10 pb-16 bg-black/70">
-            <Subtitle size={16} style={{ textAlign: 'center', color: TED_COLORS.white }}>
-              Position the QR code within the frame to automatically check in the attendee.
+          {/* Bottom Instructions - Now in white */}
+          <View className="p-8 pb-12 bg-white rounded-t-[40px] shadow-2xl">
+            <View className="flex-row items-center justify-center mb-2">
+                <MaterialCommunityIcons name="information-outline" size={16} color="#999" />
+                <Text className="text-gray-400 font-bold text-[10px] uppercase tracking-widest ml-2">Scanner Active</Text>
+            </View>
+            <Subtitle size={16} style={{ textAlign: 'center', color: TED_COLORS.black, fontWeight: '600' }}>
+              Hold the QR code inside the capture area to instantly register arrival.
             </Subtitle>
           </View>
         </View>
-      </CameraView>
+      </View>
     </View>
   );
 }

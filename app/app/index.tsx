@@ -1,5 +1,5 @@
 import { Stack, router } from 'expo-router';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, StatusBar, Image } from 'react-native';
 import { Button } from '@/components/ui/base/button';
 import { Glow } from '@/components/ui/base/glow';
 import { Title } from '@/components/ui/base/title';
@@ -14,59 +14,77 @@ export default function Home() {
   const totalCount = attendees.length;
 
   return (
-    <View className="flex-1 bg-ted-black">
+    <View className="flex-1 bg-white">
+      <StatusBar barStyle="dark-content" />
       <Stack.Screen options={{ headerShown: false }} />
-      <View className="flex-1 justify-center items-center p-5">
-        <View className="items-center mb-10">
-          {/* Logo Section */}
-          <View className="w-24 h-24 rounded-full bg-ted-dark justify-center items-center mb-5 border border-white/10">
-            <MaterialCommunityIcons name="microphone-variant" size={48} color={TED_COLORS.red} />
-          </View>
-          <Title size={32} weight="bold" color={TED_COLORS.white}>
-            TEDxArada
-          </Title>
-          <Subtitle size={16} style={{ color: TED_COLORS.accent }}>
-            Check-in System
+
+      <View className="flex-1 px-6 justify-center">
+        {/* Top Branding Section */}
+        <View className="items-center mb-12">
+          <Image
+            source={require('@/assets/images/logo-black.png')}
+            style={{ width: 180, height: 60 }}
+            resizeMode="contain"
+            className="mb-6"
+          />
+          <Subtitle size={14} style={{ color: TED_COLORS.textMuted, marginTop: -10, letterSpacing: 2, fontWeight: '700' }}>
+            ORGANIZER PORTAL
           </Subtitle>
         </View>
 
-        {/* Stats view */}
-        <View className="mb-12 bg-ted-dark px-8 py-5 rounded-3xl border border-white/10 shadow-lg items-center">
-          <View className="flex-row justify-between w-64">
-            <View className="items-center">
-              <Text className="text-white text-3xl font-bold">{totalCount}</Text>
-              <Text className="text-gray-400 text-sm font-semibold mt-1">Total</Text>
+        {/* Stats Card */}
+        <View className="bg-white border border-gray-100 rounded-[40px] p-8 shadow-2xl shadow-black/5 mb-12">
+          <View className="flex-row justify-between items-center mb-8">
+            <View>
+              <Text className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Check-in Status</Text>
+              <Text className="text-ted-black text-2xl font-black">
+                {checkedInCount} <Text className="text-gray-300 font-medium">/ {totalCount}</Text>
+              </Text>
             </View>
-            <View className="w-px h-full bg-white/20 mx-4" />
-            <View className="items-center">
-              <Text className="text-ted-red text-3xl font-bold">{checkedInCount}</Text>
-              <Text className="text-gray-400 text-sm font-semibold mt-1">Checked In</Text>
+            <View className="bg-ted-gray w-12 h-12 rounded-2xl justify-center items-center">
+              <MaterialCommunityIcons name="chart-donut" size={24} color={TED_COLORS.red} />
             </View>
           </View>
-          {/* Progress Bar */}
-          <View className="w-full h-2 bg-black/50 rounded-full mt-6 overflow-hidden">
-            <View 
-              style={{ width: `${totalCount > 0 ? (checkedInCount / totalCount) * 100 : 0}%` }} 
-              className="h-full bg-ted-red" 
+
+          {/* Progress Bar Container */}
+          <View className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+            <View
+              style={{ width: `${totalCount > 0 ? (checkedInCount / totalCount) * 100 : 0}%` }}
+              className="h-full bg-ted-red shadow-sm"
             />
+          </View>
+          <View className="flex-row justify-between mt-3">
+            <Text className="text-ted-red font-bold text-xs">{Math.round((checkedInCount / totalCount) * 100)}% Complete</Text>
+            <Text className="text-gray-400 text-xs font-medium">{totalCount - checkedInCount} remaining</Text>
           </View>
         </View>
 
-        <View className="mt-5">
-          <Glow size={4} color={TED_COLORS.red} secondaryColor={TED_COLORS.accent} radius={30}>
+        {/* Primary Actions */}
+        <View className="space-y-6 items-center">
+          <Glow size={6} color={TED_COLORS.red} secondaryColor={TED_COLORS.accent} radius={35}>
             <Button
               onPress={() => router.push('/scan')}
               backgroundColor={TED_COLORS.red}
-              width={280}
-              height={60}
-              borderRadius={30}
+              width={300}
+              height={70}
+              borderRadius={35}
             >
               <View className="flex-row items-center justify-center">
-                <MaterialCommunityIcons name="qrcode-scan" size={24} color={TED_COLORS.white} className="mr-2" />
-                <Text className="text-white text-lg font-bold">Start Scanning</Text>
+                <MaterialCommunityIcons name="qrcode-scan" size={26} color="white" />
+                <Text className="text-white text-xl font-bold ml-3 italic">Launch Scanner</Text>
               </View>
             </Button>
           </Glow>
+
+          <Pressable
+            onPress={() => router.push('/attendees')}
+            className="flex-row items-center mt-12 bg-gray-50 px-6 py-3 rounded-2xl border border-gray-100 active:bg-gray-100"
+          >
+            <MaterialCommunityIcons name="account-group-outline" size={22} color={TED_COLORS.black} />
+            <Text className="ml-3 font-bold text-base text-ted-black">
+              Manage Attendees
+            </Text>
+          </Pressable>
         </View>
       </View>
     </View>
