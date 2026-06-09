@@ -1,0 +1,13 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import EventsIndexPage from "../../components/archive/EventsIndexPage";
+import Footer from "../../components/Footer.astro";
+---
+
+<Layout
+  title="Previous Events"
+  description="Explore the archive of past TEDxArada events — themes, speakers, schedules, and the ideas worth spreading from Addis Ababa."
+>
+  <EventsIndexPage client:load />
+  <Footer />
+</Layout>

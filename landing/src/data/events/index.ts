@@ -29,4 +29,22 @@ export function getAllEvents(): TedxEvent[] {
   return Object.values(events);
 }
 
+export function getPastEvents(): TedxEvent[] {
+  return getAllEvents()
+    .filter((event) => event.status === "past")
+    .sort(
+      (a, b) =>
+        new Date(b.date.schemaStart).getTime() -
+        new Date(a.date.schemaStart).getTime()
+    );
+}
+
+export function getPastEventIds(): string[] {
+  return getPastEvents().map((event) => event.id);
+}
+
+export function getEventCardImage(event: TedxEvent): string {
+  return event.speakers[0]?.image ?? "/images/og-image.jpg";
+}
+
 export type { TedxEvent, Speaker, ScheduleItem, Sponsor } from "./types";

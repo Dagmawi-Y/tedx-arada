@@ -1,0 +1,52 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import EventArchivePage from "../../components/archive/EventArchivePage";
+import Footer from "../../components/Footer.astro";
+import { getPastEventIds, getEvent } from "../../data/events";
+import type { TedxEvent } from "../../data/events";
+
+export function getStaticPaths() {
+  return getPastEventIds().map((id) => ({
+    params: { id },
+    props: { event: getEvent(id) },
+  }));
+}
+
+interface Props {
+  event: TedxEvent;
+}
+
+const { event } = Astro.props;
+---
+
+<Layout
+  title={`${event.name} — Archive`}
+  description={`${event.seo.description} Relive ${event.name} from ${event.date.display}.`}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": event.seo.eventName,
+    "startDate": event.date.schemaStart,
+    "endDate": event.date.schemaEnd,
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": event.venue.name,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": event.venue.city,
+        "addressCountry": "ET"
+      }
+    },
+    "description": event.seo.description,
+    "organizer": {
+      "@type": "Organization",
+      "name": "TEDxArada",
+      "url": "https://tedxarada.com"
+    }
+  })} />
+  <EventArchivePage client:load event={event} />
+  <Footer />
+</Layout>
