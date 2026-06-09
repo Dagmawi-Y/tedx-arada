@@ -1,11 +1,9 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { getCurrentEvent } from '../data/events';
 
 export default function Sponsors() {
-    const sponsors = [
-        { name: "Fendika", logo: "/images/partners/fendeka-logo.png" },
-        { name: "Hyatt Regency", logo: "/images/partners/hyatt-logo (1).png" }
-    ];
+    const { sponsors } = getCurrentEvent();
 
     return (
         <section className="py-24 md:py-40 bg-ted-black/95 border-b border-t border-white/5">
@@ -31,14 +29,13 @@ export default function Sponsors() {
                 <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
                     {sponsors.map((sponsor, idx) => (
                         <motion.div
-                            key={idx}
+                            key={sponsor.name}
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1, duration: 0.6 }}
                             className="relative flex-1 min-w-[280px] aspect-2/1 flex items-center justify-center p-12 rounded-2xl transition-all duration-500 group overflow-hidden bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-white/10 will-change-transform"
                         >
-                            {/* Hover Glow Effect */}
                             <div className="absolute inset-0 bg-radial-vignette opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

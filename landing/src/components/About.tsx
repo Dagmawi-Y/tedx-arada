@@ -1,10 +1,12 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { getCurrentEvent } from '../data/events';
 
 export default function About() {
+    const event = getCurrentEvent();
+
     return (
         <section className="min-h-svh flex flex-col justify-center py-24 md:py-40 bg-ted-black relative z-10 border-t border-white/5 overflow-hidden">
-            {/* Background Life - Optimized by replacing maskImage with radial overlay */}
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(230,43,30,0.15)_0%,transparent_70%)] rounded-full opacity-70 transform translate-x-1/3 -translate-y-1/3 will-change-transform" />
                 <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(127,29,29,0.25)_0%,transparent_70%)] rounded-full opacity-50 transform -translate-x-1/3 translate-y-1/3 will-change-transform" />
@@ -22,11 +24,11 @@ export default function About() {
                         className="lg:col-span-7 will-change-[transform,opacity]"
                     >
                         <h4 className="font-sans text-lg md:text-xl text-white/70 tracking-widest font-light uppercase mb-4 md:mb-6">
-                            The Spirit.
+                            {event.theme.label}
                         </h4>
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-[1.1] tracking-tight">
-                            Bringing ideas to <br className="hidden md:block" />
-                            <span className="text-transparent bg-clip-text bg-linear-to-r from-ted-red to-red-500 italic block mt-2 text-5xl md:text-6xl lg:text-7xl">Addis.</span>
+                            {event.theme.title} <br className="hidden md:block" />
+                            <span className="text-transparent bg-clip-text bg-linear-to-r from-ted-red to-red-500 italic block mt-2 text-5xl md:text-6xl lg:text-7xl">{event.theme.titleAccent}</span>
                         </h2>
                     </motion.div>
 
@@ -44,10 +46,10 @@ export default function About() {
                                 About
                             </h3>
                             <p className="text-xl md:text-2xl text-gray-300 font-sans leading-relaxed font-light">
-                                TEDxArada is a local, independently organized event that brings people together to share a TED-like experience.
+                                {event.theme.description}
                             </p>
                             <p className="mt-8 text-base md:text-lg text-gray-500 font-sans leading-relaxed">
-                                Our goal is to highlight the incredible innovation, art, and community work happening right here in the historic heart of Ethiopia, and to spark deep discussion and connection within our city.
+                                {event.theme.extendedDescription}
                             </p>
                         </div>
                     </motion.div>

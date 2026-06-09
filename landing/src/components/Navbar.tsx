@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { getCurrentEvent } from '../data/events';
 
 export default function Navbar() {
+    const event = getCurrentEvent();
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -40,7 +42,6 @@ export default function Navbar() {
                         </span>
                     </a>
 
-                    {/* Desktop Links */}
                     <div className="hidden md:flex items-center space-x-8">
                         {links.map((link) => (
                             <a
@@ -53,7 +54,7 @@ export default function Navbar() {
                             </a>
                         ))}
                         <a
-                            href="https://forms.gle/dzSCXAMxQwTaKGfm7"
+                            href={event.registrationUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-6 py-2.5 bg-ted-red text-white text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-ted-red transition-colors duration-300 rounded-[2px]"
@@ -62,7 +63,6 @@ export default function Navbar() {
                         </a>
                     </div>
 
-                    {/* Mobile Menu Toggle */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         className="md:hidden relative z-10 p-2 text-white hover:text-ted-red transition-colors duration-300"
@@ -77,7 +77,6 @@ export default function Navbar() {
                 </div>
             </motion.nav>
 
-            {/* Mobile Menu */}
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
@@ -103,7 +102,7 @@ export default function Navbar() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
-                            href="https://forms.gle/dzSCXAMxQwTaKGfm7"
+                            href={event.registrationUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => setMobileMenuOpen(false)}

@@ -1,0 +1,97 @@
+{
+  "id": "salon-2026",
+  "name": "TEDxArada Salon",
+  "status": "past",
+  "hero": {
+    "eyebrow": "Ideas worth spreading.",
+    "headline": "From The Heart of",
+    "headlineAccent": "Addis Ababa.",
+    "dateDisplay": "March 14",
+    "venue": "Fendika@Hyatt"
+  },
+  "theme": {
+    "label": "The Spirit.",
+    "title": "Bringing ideas to",
+    "titleAccent": "Addis.",
+    "description": "TEDxArada is a local, independently organized event that brings people together to share a TED-like experience.",
+    "extendedDescription": "Our goal is to highlight the incredible innovation, art, and community work happening right here in the historic heart of Ethiopia, and to spark deep discussion and connection within our city."
+  },
+  "date": {
+    "display": "March 14, 2026",
+    "timeDisplay": "9:00 AM – 6:00 PM EAT",
+    "schemaStart": "2026-03-14T09:00:00+03:00",
+    "schemaEnd": "2026-03-14T18:00:00+03:00"
+  },
+  "venue": {
+    "name": "Fendika Cultural Center & Hyatt Regency",
+    "display": "Fendika at Hyatt, Addis Ababa",
+    "city": "Addis Ababa",
+    "country": "Ethiopia"
+  },
+  "registrationUrl": "https://forms.gle/dzSCXAMxQwTaKGfm7",
+  "speakers": [
+    {
+      "id": "amadou-daffe",
+      "name": "Amadou Daffe",
+      "role": "CEO & Founder, Gebeya Inc",
+      "topic": "Africa's AI Agents & The Tool Problem",
+      "image": "/images/speakers/1-amadou.jpeg",
+      "bio": "Amadou Daffe is the CEO and Co-founder of Gebeya, where he is building Africa's own AI agents for the continent's service and creative economy. With a background in Computer Science and Information Systems, Amadou's real inspiration came from seeing talented African professionals struggle not because of lack of talent, but because of inadequate tools. This realization led him to found Gebeya in 2016. Today, the company is creating digital assistants designed for the realities of African businesses from mobile money to WhatsApp-driven commerce. Passionate about Africa, technology, and talent, Amadou believes the continent doesn't have a talent problem it has a tool problem. Through Gebeya, he is working to equip millions of African entrepreneurs with the infrastructure they need to build and scale successful businesses."
+    },
+    {
+      "id": "melat-belayneh",
+      "name": "Melat Belayneh",
+      "role": "Business Growth, Coaching & Communications",
+      "topic": "Innovation in Ethiopia's Service Economy",
+      "image": "/images/speakers/1-melat.jpeg",
+      "bio": "Melat Belayneh is a tech entrepreneur and Founder/CEO of WAZA Trading PLC, specializing in hospitality and events technology. With 15+ years in FMCG marketing, she has led campaigns for global brands including Unilever, Diageo, Monin, and Estée Lauder Companies. She also works with organizations such as UN Women and UNFPA on initiatives advancing social impact and gender equity in Ethiopia."
+    }
+  ],
+  "schedule": [
+    {
+      "time": "02:30 PM",
+      "title": "Registration & Networking",
+      "description": "Welcome to TEDxArada. Check-in, grab your badge, and meet fellow attendees.",
+      "type": "break"
+    },
+    {
+      "time": "03:00 PM",
+      "title": "Opening: The Heart of Arada",
+      "description": "Opening remarks and an introduction to today's speakers.",
+      "type": "session"
+    },
+    {
+      "time": "03:15 PM",
+      "title": "Session 1: Amadou Daffe",
+      "description": "CEO & Founder at Gebeya Inc - Exploring Africa's AI Agents and infrastructure.",
+      "type": "session"
+    },
+    {
+      "time": "04:00 PM",
+      "title": "Quick Networking Break",
+      "description": "A focused space for deep conversations and community connection.",
+      "type": "break"
+    },
+    {
+      "time": "04:30 PM",
+      "title": "Session 2: Melat Belayneh",
+      "description": "Business Growth & Communications - Navigating innovation in Ethiopia's economy.",
+      "type": "session"
+    },
+    {
+      "time": "05:15 PM",
+      "title": "Closing Remarks",
+      "description": "Final takeaways and networking until close.",
+      "type": "break"
+    }
+  ],
+  "sponsors": [
+    { "name": "Fendika", "logo": "/images/partners/fendeka-logo.png" },
+    { "name": "Hyatt Regency", "logo": "/images/partners/hyatt-logo (1).png" }
+  ],
+  "seo": {
+    "title": "Ideas worth spreading",
+    "description": "TEDxArada - Join us at Fendika@Hyatt in Addis Ababa, Ethiopia, for a transformative day of ideas and inspiration. Discover local innovation and global perspectives.",
+    "eventName": "TEDxArada: From The Heart of Addis Ababa"
+  }
+}

@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import speakersData from '../data/speakers.json';
+import { getCurrentEvent } from '../data/events';
 
 export default function Speakers() {
+    const { speakers: speakersData } = getCurrentEvent();
     const scrollRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);

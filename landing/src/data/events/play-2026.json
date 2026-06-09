@@ -1,0 +1,111 @@
+{
+  "id": "play-2026",
+  "name": "TEDxArada PLAY",
+  "status": "upcoming",
+  "hero": {
+    "eyebrow": "TEDxArada PLAY 2026",
+    "headline": "The Serious",
+    "headlineAccent": "PLAY.",
+    "dateDisplay": "June 20",
+    "venue": "Fendika@Hyatt"
+  },
+  "theme": {
+    "label": "The Theme.",
+    "title": "A space for",
+    "titleAccent": "Serious PLAY.",
+    "description": "TEDxArada PLAY explores curiosity, creativity, imagination, experimentation, and the joy of human expression.",
+    "extendedDescription": "In the spirit of ideas worth spreading, TEDx is a program of local, self-organized events that bring people together to share a TED-like experience. At a TEDx event, TED Talks video and live speakers combine to spark deep discussion and connection. This event is open to the public — we look forward to welcoming you into an experience shaped by ideas worth spreading."
+  },
+  "date": {
+    "display": "June 20, 2026",
+    "timeDisplay": "2:00 PM – 6:00 PM EAT",
+    "schemaStart": "2026-06-20T14:00:00+03:00",
+    "schemaEnd": "2026-06-20T18:00:00+03:00"
+  },
+  "venue": {
+    "name": "Fendika@Hyatt",
+    "display": "Fendika@Hyatt, Addis Ababa",
+    "city": "Addis Ababa",
+    "country": "Ethiopia"
+  },
+  "registrationUrl": "https://docs.google.com/forms/d/e/1FAIpQLScg8qh_flMeh55zF06qcvDHxvEap3CGKiPaJBz88htILJ5YFQ/viewform",
+  "speakers": [
+    {
+      "id": "chapi-mwango",
+      "name": "Chapi Mwango",
+      "role": "Governance & Policy Professional | AU Ecosystem | Regional Integration",
+      "topic": "To be announced",
+      "image": "/images/speakers/play-2026/chapi-mwango.jpg",
+      "bio": "Chapi Mwango is a Policy Professional and storyteller whose work explores the intersection of identity, leadership, and human connection across Africa. Born between Zambian and Ethiopian heritage and raised in Addis Ababa, his journey across cultures and continents has shaped a deeply reflective perspective on belonging, governance, and shared destiny. Through his work within development and public speaking, Chapi is passionate about building bridges between people, ideas, and generations."
+    },
+    {
+      "id": "dagmawi-bedilu",
+      "name": "Dagmawi Bedilu",
+      "role": "Co-Founder & CSO, Efuyegela Consultants | Game Thinking Lead, EnterAfrica",
+      "topic": "To be announced",
+      "image": "/images/speakers/play-2026/dagmawi-bedilu.jpg",
+      "bio": "Dagmawi Bedilu is an Ethiopian game thinker, tech and innovation consultant, community builder, and serial entrepreneur focused on youth empowerment and meaningful community engagement. A former senior software architect, he transitioned into the world of games and engagement, co-founding initiatives such as Chewata Awaqi, EGA, EnterAfrica, Chewatacon (AGW), and 100Shama. He has spoken at international platforms including Gamescom and A Maze Berlin, and is driven by a mission to inspire joy, creativity, and human connection."
+    },
+    {
+      "id": "panos-hatziandreou",
+      "name": "Professor Panagiotis (Panos) Hatziandreou",
+      "role": "Educator, Psychologist & Head of School, Lebawi International Academy",
+      "topic": "To be announced",
+      "image": "/images/speakers/play-2026/panos-hatziandreou.png",
+      "bio": "Panagiotis (Panos) Hatziandreou is a senior educational leader, psychologist, and professor with over 30 years of experience in education, leadership, psychotherapy, and institutional development. He is currently Head of School and General Manager at Lebawi International Academy in Addis Ababa, where he works with boards, government agencies, and partners to strengthen educational impact. He has also served as a consultant to U.S. universities on study abroad programs and cross-cultural education, and previously taught psychology at Cascadia College and the University of Washington. His work spans education leadership, teaching, and organizational development, guided by a belief in education as a tool for transformation and connection across cultures. He is also a lifelong learner, currently exploring music, particularly Ethio-jazz and blues vocals."
+    }
+  ],
+  "schedule": [
+    {
+      "time": "02:00 PM",
+      "title": "Doors Open & Registration",
+      "description": "Check in, meet fellow attendees, and settle in for an afternoon of ideas.",
+      "type": "break"
+    },
+    {
+      "time": "02:30 PM",
+      "title": "Welcome to TEDxArada PLAY",
+      "description": "Opening remarks and an introduction to the theme: The Serious PLAY.",
+      "type": "session"
+    },
+    {
+      "time": "02:45 PM",
+      "title": "Talk: Chapi Mwango",
+      "description": "Governance & Policy Professional — talk title to be announced.",
+      "type": "session"
+    },
+    {
+      "time": "03:30 PM",
+      "title": "Play Break",
+      "description": "A moment to connect, reflect, and recharge.",
+      "type": "break"
+    },
+    {
+      "time": "04:00 PM",
+      "title": "Talk: Dagmawi Bedilu",
+      "description": "Game thinker & innovation consultant — talk title to be announced.",
+      "type": "session"
+    },
+    {
+      "time": "04:45 PM",
+      "title": "Talk: Professor Panos Hatziandreou",
+      "description": "Educator & psychologist — talk title to be announced.",
+      "type": "session"
+    },
+    {
+      "time": "05:30 PM",
+      "title": "Closing & Networking",
+      "description": "Final reflections and community connection until close.",
+      "type": "break"
+    }
+  ],
+  "sponsors": [
+    { "name": "Fendika", "logo": "/images/partners/fendeka-logo.png" },
+    { "name": "Hyatt Regency", "logo": "/images/partners/hyatt-logo (1).png" }
+  ],
+  "seo": {
+    "title": "The Serious PLAY",
+    "description": "TEDxArada PLAY 2026 — Join us June 20 at Fendika@Hyatt in Addis Ababa for an afternoon exploring curiosity, creativity, imagination, and the joy of human expression.",
+    "eventName": "TEDxArada PLAY 2026: The Serious PLAY"
+  }
+}

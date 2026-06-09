@@ -1,59 +1,32 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { getCurrentEvent } from '../data/events';
+import type { ScheduleItem } from '../data/events';
 
-const scheduleData = [
-    {
-        "time": "02:30 PM",
-        "title": "Registration & Networking",
-        "description": "Welcome to TEDxArada. Check-in, grab your badge, and meet fellow attendees.",
-        "type": "break",
-        "icon": <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 2v2m4-2v2m2 4a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1M6 2v2" /></svg>
-    },
-    {
-        "time": "03:00 PM",
-        "title": "Opening: The Heart of Arada",
-        "description": "Opening remarks and an introduction to today's speakers.",
-        "type": "session",
-        "icon": <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v1a7 7 0 0 1-14 0v-1" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
-    },
-    {
-        "time": "03:15 PM",
-        "title": "Session 1: Amadou Daffe",
-        "description": "CEO & Founder at Gebeya Inc - Exploring Africa's AI Agents and infrastructure.",
-        "type": "session",
-        "icon": <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg>
-    },
-    {
-        "time": "04:00 PM",
-        "title": "Quick Networking Break",
-        "description": "A focused space for deep conversations and community connection.",
-        "type": "break",
-        "icon": <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="4" /><line x1="4.93" y1="4.93" x2="19.07" y2="19.07" /></svg>
-    },
-    {
-        "time": "04:30 PM",
-        "title": "Session 2: Melat Belayneh",
-        "description": "Business Growth & Communications - Navigating innovation in Ethiopia's economy.",
-        "type": "session",
-        "icon": <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" /><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /></svg>
-    },
-    {
-        "time": "05:15 PM",
-        "title": "Closing Remarks",
-        "description": "Final takeaways and networking until close.",
-        "type": "break",
-        "icon": <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m16 2 2 2-4 4M21 3l-1.41 1.41a2 2 0 0 0 0 2.83L21 9" /><path d="M15 16s-2 1-4 1-4-1-4-1" /><path d="M13 2s-3 1-3 1" /><path d="M12 15V8" /><path d="M3 21h18" /></svg>
-    }
-];
+const sessionIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v1a7 7 0 0 1-14 0v-1" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
+);
+
+const breakIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="4" /><line x1="4.93" y1="4.93" x2="19.07" y2="19.07" /></svg>
+);
+
+function getScheduleIcon(item: ScheduleItem) {
+    if (item.type === 'break') return breakIcon;
+    if (item.title.toLowerCase().includes('opening') || item.title.toLowerCase().includes('welcome')) return sessionIcon;
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg>
+    );
+}
 
 export default function Schedule() {
+    const event = getCurrentEvent();
+    const scheduleData = event.schedule;
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     return (
         <section className="py-24 md:py-40 bg-ted-black border-t border-white/5 relative overflow-hidden">
-            {/* Base Background Texture - Optimized by replacing maskImage with radial overlay */}
             <div className="absolute inset-0 z-0">
-                {/* 1. Refined Blueprint-Style Cross Grid */}
                 <div
                     className="absolute inset-0 opacity-[0.35]"
                     style={{
@@ -74,10 +47,8 @@ export default function Schedule() {
                         backgroundSize: '15px 15px'
                     }}
                 />
-                {/* Unified radial overlay for masking effect */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,1)_95%)]" />
 
-                {/* 2. Floating 'Pulse' Blobs (Subtle Movement) */}
                 <motion.div
                     animate={{
                         opacity: [0.05, 0.1, 0.05],
@@ -96,7 +67,6 @@ export default function Schedule() {
                     className="absolute -bottom-20 -left-60 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(230,43,30,0.1)_0%,transparent_70%)] rounded-full will-change-[transform,opacity]"
                 />
 
-                {/* 3. Global Noise Texture */}
                 <div
                     className="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-screen"
                     style={{
@@ -118,11 +88,15 @@ export default function Schedule() {
                         <div className="flex flex-col md:flex-row gap-4 md:gap-8 mt-6 text-gray-400 font-sans text-sm tracking-widest uppercase font-medium justify-center">
                             <p className="flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ted-red"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
-                                March 14
+                                {event.date.display}
                             </p>
                             <p className="flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ted-red"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-                                Fendika at Hyatt, Addis Ababa
+                                {event.venue.display}
+                            </p>
+                            <p className="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ted-red"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                                {event.date.timeDisplay}
                             </p>
                         </div>
                     </motion.div>
@@ -156,7 +130,7 @@ export default function Schedule() {
                                         <div className="grow flex justify-between items-center group-hover:pl-2 transition-all duration-300">
                                             <span className={`text-xl md:text-3xl font-heading tracking-tight flex items-center gap-4 ${isBreak ? 'text-gray-500 font-light' : 'text-white font-bold group-hover:text-ted-red transition-colors'}`}>
                                                 <span className={`opacity-50 group-hover:opacity-100 transition-opacity ${!isBreak ? 'text-ted-red' : ''}`}>
-                                                    {item.icon}
+                                                    {getScheduleIcon(item)}
                                                 </span>
                                                 {item.title}
                                             </span>
